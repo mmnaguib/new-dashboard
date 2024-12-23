@@ -1,0 +1,115 @@
+.addBtn{
+    background-color: green;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    height: 30px;
+    margin-bottom: 15px;
+    line-height: 20px;
+}
+.tableShow{
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border-color: #b97802;
+}
+
+.tableShow thead{background-color: #b97802;color: #fff}
+
+.tableShow td,
+.tableShow th{
+    padding: 5px;
+}
+
+.actionsBtn{
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    margin: 0 3px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+.actionsBtn.edit{
+    background-color: #737373;
+}
+.actionsBtn.delete{
+    background-color: #f00;
+}
+
+.addBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .addBtn:hover {
+    background-color: #45a049;
+  }
+  
+  .addCategoryPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popupContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 440px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .addCategoryBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
+  .addCategoryBtn:hover {
+    background-color: #45a049;
+  }
+  
+  .closePopupBtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #b97802;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .closePopupBtn:hover {
+    background-color: darkred;
+  }
+  
+  form .inputFiled{
+    text-align: right;
+  }
