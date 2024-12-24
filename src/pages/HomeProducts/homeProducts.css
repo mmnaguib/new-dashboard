@@ -1,0 +1,12 @@
+.homeCardProducts {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 10px;
+}
+
+.homeCardProducts .productCard {
+  border: 1px solid #f00;
+  padding: 15px;
+  border-radius: 5px;
+}

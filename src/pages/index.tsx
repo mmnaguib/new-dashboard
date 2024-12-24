@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import ImageSlider from "./Slider/Slider";
+import Categories from "./Categories/Categories";
+import HomeProducts from "./HomeProducts/HomeProducts";
 
 const Home = () => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null
+  );
   return (
     <>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
+      <ImageSlider />
+      <Categories setSelectedCategoryId={setSelectedCategoryId} />
+      <HomeProducts categoryId={selectedCategoryId} />
     </>
   );
 };

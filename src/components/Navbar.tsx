@@ -6,10 +6,12 @@ const Navbar = () => {
   const isLoggedIn = !!localStorage.getItem("authToken");
   const navigate = useNavigate();
   const [user, setUser] = useState<ILoginResponse | null>(null);
+  const [userList, setUserList] = useState<boolean>(false);
   const logoutHandler = () => {
     navigate("/");
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
+    setUserList(false);
   };
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -19,19 +21,35 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar" style={{ display: "flex" }}>
-      <NavLink to="/">Home</NavLink> |{" "}
-      {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
-      {isLoggedIn && user?.roles.includes("Admin") && (
-        <NavLink to="/admin">Admin</NavLink>
-      )}
+    <div
+      className={
+        window.location.pathname.includes("/admin")
+          ? `navbar`
+          : "allNavbar navbar"
+      }
+    >
+      <div className="navLinks">
+        <NavLink to="/">الصفحة الرئيسية</NavLink>
+        {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
+        {isLoggedIn && user?.roles.includes("Admin") && (
+          <NavLink to="/admin">لوحة الأدمن</NavLink>
+        )}
+      </div>
       {isLoggedIn && (
-        <div style={{ display: "flex" }}>
-          <span className="username">{user?.name}</span>
-          <button className="logout" onClick={logoutHandler}>
-            logout
-          </button>
-        </div>
+        <>
+          <i
+            className="fa-solid fa-user fa-lg"
+            onClick={() => setUserList((prev) => !prev)}
+          ></i>
+          {userList && (
+            <div className="userListContent">
+              <span className="username">{user?.name}</span>
+              <button className="logout" onClick={logoutHandler}>
+                logout
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

@@ -4,7 +4,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import ProtectedRoute from "../components/auth/ProtectedRoute";
 import ErrorHandler from "../components/error/ErrorHandle";
 import Root from "../pages/Layout";
 import Home from "../pages";
@@ -16,9 +15,9 @@ import AdminCategories from "../pages/admin/Categories/Categories";
 import RegisterNewAdmin from "../pages/admin/Register/RegisterNewAdmin";
 import AdminProducts from "../pages/admin/Products/Products";
 import AdminBanners from "../pages/admin/Banners/Banners";
+import Category from "../pages/Categories/Category";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
-const token = isLoggedIn ? localStorage.getItem("authToken") : null;
 console.log(isLoggedIn);
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,19 +25,8 @@ const router = createBrowserRouter(
       <Route path="/" element={<Root />} errorElement={<ErrorHandler />}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/category/:id" element={<Category />} />
       </Route>
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute
-            isAllowed={isLoggedIn}
-            redirectPath="/login" // أعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يتم تسجيل الدخول
-            data={token}
-          >
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      />
 
       <Route
         path={"/admin"}

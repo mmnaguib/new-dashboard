@@ -13,6 +13,7 @@ const ProductService = {
       });
     return req;
   },
+
   addNewProduct: async (
     title: string,
     description: string,
@@ -54,6 +55,16 @@ const ProductService = {
         Authorization: `Bearer ${token}`,
       },
     });
+  },
+
+  getAllProductsAccourdingToCategory: async (id: number) => {
+    const req = axiosInstance
+      .get(`Product?categoryID=${id}`)
+      .then((res) => res.data.items)
+      .catch((err) => {
+        console.log(err);
+      });
+    return req;
   },
 };
 

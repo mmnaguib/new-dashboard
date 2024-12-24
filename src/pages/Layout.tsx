@@ -5,8 +5,10 @@ const Root = () => {
   return (
     <>
       <Navbar />
-      <div className="content">
-        <Outlet />
+      <div>
+        <div className="allContent">
+          <Outlet />
+        </div>
       </div>
     </>
   );

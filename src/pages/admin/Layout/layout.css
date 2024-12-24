@@ -8,16 +8,46 @@
     margin-right: var(--sidebarWidth);
     padding-right: 10px;
     color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    direction: rtl;
+}
+.allNavbar{
+    margin-right: 0;
+    width: 100vw
+}
+
+.navbar .fa-user{
+    padding-left: 10px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+}
+.navbar a::after{
+    content: '||';
+    padding: 0 10px;
+    color: #fff;
+}
+.navbar a:last-of-type::after{
+    content: '';
+    padding: 0;
+}
+.userListContent{
+    position: absolute;
+    top: 45px;
+    background: #000;
+    left: 10px;
+    padding: 10px;
+    border-radius: 8px;
 }
 .logout{
     border: none;
     padding: 3px;
     background-color: #737373;
     width: 80px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 15px;
     border-radius: 4px;
     color: #fff;
 }

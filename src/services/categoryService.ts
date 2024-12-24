@@ -10,14 +10,6 @@ const CategoryService = {
     return req;
   },
 
-  deleteCategory: async (id: number) => {
-    await axiosInstance.delete(`Categories/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  },
-
   addNewCategory: async (
     name: string,
     description: string,
@@ -74,6 +66,22 @@ const CategoryService = {
       );
       return err.response?.data;
     }
+  },
+
+  deleteCategory: async (id: number) => {
+    await axiosInstance.delete(`Categories/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+
+  getCategory: async (id: number) => {
+    const req = await axiosInstance
+      .get(`categories/${id}`)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+    return req;
   },
 };
 
