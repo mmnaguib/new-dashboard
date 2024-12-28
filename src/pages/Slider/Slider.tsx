@@ -18,7 +18,7 @@ const ImageSlider = () => {
   }, [fetchBanners]);
 
   return (
-    <div style={{ position: "relative", height: "51vh" }}>
+    <div style={{ position: "relative", height: "51vh", zIndex: "2" }}>
       <Swiper
         spaceBetween={0}
         slidesPerView={1}

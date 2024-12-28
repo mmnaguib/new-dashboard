@@ -43,3 +43,18 @@ export interface IEditPopupProps {
   setEditDescription: (val: string) => void;
   setEditImage: (val: File | null) => void;
 }
+
+export interface ICartProps {
+  userId: string;
+  cartId: number;
+  totalPrice: number;
+  items: ICartItem[];
+}
+
+export interface ICartItem {
+  id: number;
+  title: string;
+  image: string;
+  quantity: number;
+  price: number;
+}

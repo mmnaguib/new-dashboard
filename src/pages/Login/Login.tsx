@@ -27,6 +27,7 @@ const Login = () => {
       });
       if (response.status === 200) {
         navigate("/");
+        window.location.reload();
         toast.success("تم تسجيل الدخول بنجاح ");
         localStorage.setItem("authToken", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data));
