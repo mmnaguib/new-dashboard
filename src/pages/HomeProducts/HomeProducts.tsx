@@ -2,9 +2,29 @@ import { useCallback, useEffect, useState } from "react";
 import ProductService from "../../services/productService";
 import { IProductProps } from "../../interface";
 import "./homeProducts.css";
+import CartService from "../../services/cartService";
 const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
   const [products, setProducts] = useState<IProductProps[]>([]);
   const isLoggedIn = !!localStorage.getItem("authToken");
+  const userTempId = isLoggedIn
+    ? JSON.parse(localStorage.getItem("user")!).userId
+    : null;
+  const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
+  const addToCart = async (
+    userId: string,
+    productId: number,
+    quantity: number
+  ) => {
+    setLoading((prev) => ({ ...prev, [productId]: true }));
+    try {
+      if (!userId) return;
+      await CartService.addProductToCart(userId, productId, quantity);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading((prev) => ({ ...prev, [productId]: false }));
+    }
+  };
   const featchProducts = useCallback(async (id: number | null) => {
     let res;
     if (id) {
@@ -43,7 +63,13 @@ const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
               <span className="productPrice">${product.price}</span>
               {/* <span className="productCategory">{product.category}</span> */}
               {isLoggedIn && (
-                <button className="cartBtn">إضافة الي السلة</button>
+                <button
+                  onClick={() => addToCart(userTempId, product.id, 1)}
+                  className="cartBtn"
+                  disabled={!!loading[product.id]}
+                >
+                  {!loading[product.id] ? "إضافة الي السلة" : "loading"}
+                </button>
               )}
             </div>
           ))

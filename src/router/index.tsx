@@ -16,15 +16,16 @@ import RegisterNewAdmin from "../pages/admin/Register/RegisterNewAdmin";
 import AdminProducts from "../pages/admin/Products/Products";
 import AdminBanners from "../pages/admin/Banners/Banners";
 import Category from "../pages/Categories/Category";
+import Cart from "../pages/Cart/Cart";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
-console.log(isLoggedIn);
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Root />} errorElement={<ErrorHandler />}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/category/:id" element={<Category />} />
       </Route>
 
