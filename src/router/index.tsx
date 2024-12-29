@@ -17,6 +17,7 @@ import AdminProducts from "../pages/admin/Products/Products";
 import AdminBanners from "../pages/admin/Banners/Banners";
 import Category from "../pages/Categories/Category";
 import Cart from "../pages/Cart/Cart";
+import Order from "../pages/Order/Order";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
 const router = createBrowserRouter(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<Order />} />
         <Route path="/category/:id" element={<Category />} />
       </Route>
 

@@ -23,6 +23,14 @@ const CartService = {
       throw err;
     }
   },
+
+  deleteItemFromQuantity: async (id: number) => {
+    await axiosInstance.delete(`ShoppingCart/remove/${id}`);
+  },
+
+  updateItemQuantity: async (id: number, quantity: number) => {
+    await axiosInstance.put(`ShoppingCart/update/${id}?quantity=${quantity}`);
+  },
 };
 
 export default CartService;
