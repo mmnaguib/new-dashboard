@@ -17,7 +17,10 @@ import AdminProducts from "../pages/admin/Products/Products";
 import AdminBanners from "../pages/admin/Banners/Banners";
 import Category from "../pages/Categories/Category";
 import Cart from "../pages/Cart/Cart";
-import Order from "../pages/Order/Order";
+import AdminOrders from "../pages/admin/Orders/Orders";
+import UserOrders from "../pages/UserOrders/UserOrders";
+import CompleteOrder from "../pages/CompleteOrder/CompleteOrder";
+import Payment from "../pages/Payment/Payment";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
 const router = createBrowserRouter(
@@ -27,7 +30,9 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/order" element={<CompleteOrder />} />
+        <Route path="/my-orders" element={<UserOrders />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/category/:id" element={<Category />} />
       </Route>
 
@@ -39,6 +44,7 @@ const router = createBrowserRouter(
         <Route path="categories" element={<AdminCategories />} />
         <Route path="products" element={<AdminProducts />} />
         <Route path="banners" element={<AdminBanners />} />
+        <Route path="orders" element={<AdminOrders />} />
         <Route path="admin-register" element={<RegisterNewAdmin />} />
       </Route>
 

@@ -24,22 +24,22 @@ const AdminHome = () => {
       <div className="homeCard categories">
         <h1>{categoryNumber}</h1>
         <i className="fa-solid fa-home fa-lg"></i>
-        <Link to="/categories">أقسام</Link>
+        <Link to="/admin/categories">أقسام</Link>
       </div>
       <div className="homeCard users">
         <h1>10</h1>
         <i className="fa-solid fa-home fa-lg"></i>
-        <Link to="/">مستخدم</Link>
+        <Link to="/admin/orders">طلب</Link>
       </div>
       <div className="homeCard products">
         <h1>{productNumber}</h1>
         <i className="fa-solid fa-home fa-lg"></i>
-        <Link to="/products">منتج</Link>
+        <Link to="/admin/products">منتج</Link>
       </div>
       <div className="homeCard photos">
         <h1>{bannerNumber}</h1>
         <i className="fa-solid fa-home fa-lg"></i>
-        <Link to="/banners">صور</Link>
+        <Link to="/admin/banners">صور</Link>
       </div>
     </div>
   );

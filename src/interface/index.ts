@@ -24,7 +24,6 @@ export interface IProductProps {
   category: string;
   image: string;
 }
-export interface IRegisterProps {}
 export interface IBannerProps {
   id: number;
   image: string;
@@ -57,4 +56,27 @@ export interface ICartItem {
   image: string;
   quantity: number;
   price: number;
+}
+
+export interface IOrderProps {
+  orderId: string;
+  userId: string;
+  orderDate: string;
+  totalAmunt: number;
+  shippingAddress: string;
+  status: string;
+  createdDate: string;
+  contactNumber: string;
+  userName: string;
+  items: IOrderItem[];
+}
+
+export interface IOrderItem {
+  productId: number;
+  title: string;
+  category: string;
+  image: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
 }

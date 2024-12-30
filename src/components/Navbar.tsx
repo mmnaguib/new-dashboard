@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ILoginResponse } from "../interface";
 import CartService from "../services/cartService";
 
@@ -39,7 +39,7 @@ const Navbar = () => {
     >
       <div className="navLinks">
         <NavLink to="/">الصفحة الرئيسية</NavLink>
-        {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
+        {!isLoggedIn && <NavLink to="/login">تسجيل الدخول</NavLink>}
         {isLoggedIn && user?.roles.includes("Admin") && (
           <NavLink to="/admin">لوحة الأدمن</NavLink>
         )}
@@ -59,8 +59,10 @@ const Navbar = () => {
           {userList && (
             <div className="userListContent">
               <span className="username">{user?.name}</span>
+              <br />
+              <Link to="my-orders">طلباتي</Link> <br />
               <button className="logout" onClick={logoutHandler}>
-                logout
+                تسجيل الخروج
               </button>
             </div>
           )}

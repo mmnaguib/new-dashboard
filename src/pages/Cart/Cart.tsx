@@ -82,95 +82,107 @@ const Cart = () => {
 
   useEffect(() => {
     getCart(userTempId);
-  }, []);
+  }, [userTempId]);
   return (
     <>
-      {cartProducts?.cartId}
-      <table border={1} className="tableShow">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>المنتج</th>
-            <th>الكمية</th>
-            <th>السعر</th>
-            <th> الاجمالي $</th>
-            <th>حذف</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartProducts &&
-            cartProducts.items.map((item) => (
-              <tr key={item.id}>
-                <td>1</td>
-                <td
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "20px",
-                    border: "none",
-                  }}
-                >
-                  {item.title}
-                  <img src={item.image} alt="" width={50} height={50} />
-                </td>
-                <td>
-                  <button
-                    style={{ background: "#080" }}
-                    className="actionsBtn"
-                    onClick={() => increaseQuantity(item.id, item.quantity)}
-                  >
-                    <i className="fa-solid fa-plus"></i>
-                  </button>
-                  <b style={{ margin: "0 15px", fontSize: "20px" }}>
-                    {item.quantity}
-                  </b>
-                  <button
-                    style={{ background: "#2d5085" }}
-                    className="actionsBtn"
-                    onClick={() => decreaseQuantity(item.id, item.quantity)}
-                  >
-                    <i className="fa-solid fa-minus"></i>
-                  </button>
-                </td>
-                <td>{item.price}</td>
-                <td>{item.price * item.quantity} $</td>
-                <td>
-                  <button
-                    className="delete actionsBtn"
-                    onClick={() => deleteHandler(item.id)}
-                  >
-                    <i className="fa-solid fa-trash"></i>
-                  </button>
-                </td>
+      {cartProducts?.items.length ? (
+        <>
+          <table border={1} className="tableShow">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>السعر</th>
+                <th> الاجمالي $</th>
+                <th>حذف</th>
               </tr>
-            ))}
-        </tbody>
-      </table>
-      <div style={{ margin: "0 15px" }}>
-        <p style={{ fontWeight: "bold", fontSize: "20px" }}>
-          إجمالي سعر الفاتورة : {cartProducts?.totalPrice} جنيه مصري لا غير
-        </p>
-        <Link
-          to="/order"
-          state={cartProducts?.cartId ? { cartId: cartProducts.cartId } : 0}
-          style={{
-            padding: "10px",
-            border: "none",
-            background: "#000",
-            color: "#fff",
-            width: "200px",
-            fontWeight: "bold",
-            borderRadius: "5px",
-            textDecoration: "none",
-            display: "inline-block",
-            textAlign: "center",
-          }}
-          className="checkoutBtn"
-        >
-          تابع عملية الشراء
-        </Link>
-      </div>
+            </thead>
+            <tbody>
+              {cartProducts &&
+                cartProducts.items.map((item) => (
+                  <tr key={item.id}>
+                    <td>1</td>
+                    <td
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "20px",
+                        border: "none",
+                      }}
+                    >
+                      {item.title}
+                      <img src={item.image} alt="" width={50} height={50} />
+                    </td>
+                    <td>
+                      <button
+                        style={{ background: "#080" }}
+                        className="actionsBtn"
+                        onClick={() => increaseQuantity(item.id, item.quantity)}
+                      >
+                        <i className="fa-solid fa-plus"></i>
+                      </button>
+                      <b style={{ margin: "0 15px", fontSize: "20px" }}>
+                        {item.quantity}
+                      </b>
+                      <button
+                        style={{ background: "#2d5085" }}
+                        className="actionsBtn"
+                        onClick={() => decreaseQuantity(item.id, item.quantity)}
+                      >
+                        <i className="fa-solid fa-minus"></i>
+                      </button>
+                    </td>
+                    <td>{item.price}</td>
+                    <td>{item.price * item.quantity} $</td>
+                    <td>
+                      <button
+                        className="delete actionsBtn"
+                        onClick={() => deleteHandler(item.id)}
+                      >
+                        <i className="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+          <div style={{ margin: "0 15px" }}>
+            <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+              إجمالي سعر الفاتورة : {cartProducts?.totalPrice} جنيه مصري لا غير
+            </p>
+            <Link
+              to="/order"
+              state={
+                cartProducts?.cartId
+                  ? { shoppingCartId: cartProducts.cartId, fromSource: true }
+                  : {}
+              }
+              style={{
+                padding: "10px",
+                border: "none",
+                background: "#000",
+                color: "#fff",
+                width: "200px",
+                fontWeight: "bold",
+                borderRadius: "5px",
+                textDecoration: "none",
+                display: "inline-block",
+                textAlign: "center",
+              }}
+              className="checkoutBtn"
+            >
+              تابع عملية الشراء
+            </Link>
+          </div>
+        </>
+      ) : (
+        <div>
+          <p>لا يوجد منتجات في السلة</p>
+          <Link to="/">ارجع للتصفح</Link>
+        </div>
+      )}
     </>
   );
 };

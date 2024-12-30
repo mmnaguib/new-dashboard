@@ -31,7 +31,7 @@ const RegisterNewAdmin = () => {
     }
     setLoading(true);
     try {
-      const res = await axiosInstance.post(
+      await axiosInstance.post(
         "Account/CreateAdminAccount",
         {
           email,
@@ -47,8 +47,13 @@ const RegisterNewAdmin = () => {
           },
         }
       );
-      console.log(res);
-      toast.success("تم تسجيل الدخول بنجاح ");
+      setEmail("");
+      setFirstName("");
+      setPassword("");
+      setLastName("");
+      setPhone("");
+      setConfirmPass("");
+      toast.success("تم إضافة الادمن بنجاح ");
     } catch (err) {
       console.log(err);
     } finally {

@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import OrderService from "../../services/orderService";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
-const Order = () => {
+const CompleteOrder = () => {
   const userId = JSON.parse(localStorage.getItem("user")!).userId;
   const [shippingAddress, setAddress] = useState<string>("");
   const [phoneNumebr, setPhoneNumber] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const location = useLocation();
-  const shoppingCartId = location.state?.cartId;
+  const { shoppingCartId, fromSource } = location.state || {};
+  const navigate = useNavigate();
+  if (!fromSource) {
+    return <Navigate to="/" />;
+  }
   const formHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    await OrderService.addNewOrder(
-      userId,
-      shoppingCartId,
-      shippingAddress,
-      phoneNumebr
-    );
+    setLoading(true);
+    try {
+      await OrderService.addNewOrder(
+        userId,
+        shoppingCartId,
+        shippingAddress,
+        phoneNumebr
+      );
+      navigate("/payment");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="order-Form">
@@ -47,7 +59,7 @@ const Order = () => {
 
         <div style={{ width: "200px", margin: "auto" }}>
           <button type="submit" className="btn submitBtn" disabled={loading}>
-            {loading ? "loading" : "تسجيل الدخول"}
+            {loading ? "loading" : "سجل الطلب"}
           </button>
         </div>
       </form>
@@ -55,4 +67,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default CompleteOrder;
