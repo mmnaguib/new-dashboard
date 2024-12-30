@@ -24,7 +24,7 @@ const AddProduct = () => {
   const addProductHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
-    await ProductService.addNewProduct(
+    const res = await ProductService.addNewProduct(
       title,
       description,
       image,
@@ -32,15 +32,17 @@ const AddProduct = () => {
       qunatity,
       categoryId
     );
-    window.location.reload();
-    toast.success("تمت اضافة القسم بنجاح");
-    setLoading(false);
-    setOpenNew(false);
-    setTitle("");
-    setDescription("");
-    setPrice(0);
-    setQuantity(0);
-    setImage(null);
+    if (res?.status === 200) {
+      window.location.reload();
+      toast.success("تمت اضافة القسم بنجاح");
+      setLoading(false);
+      setOpenNew(false);
+      setTitle("");
+      setDescription("");
+      setPrice(0);
+      setQuantity(0);
+      setImage(null);
+    }
   };
 
   const getAllCatgories = async () => {
@@ -78,6 +80,7 @@ const AddProduct = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   className="inputField"
                   placeholder="اسم القسم"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -86,6 +89,7 @@ const AddProduct = () => {
                   type="file"
                   onChange={handleFileChange}
                   className="inputField"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -96,6 +100,7 @@ const AddProduct = () => {
                   onChange={(e) => setPrice(+e.target.value)}
                   className="inputField"
                   placeholder="سعر المنتج"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -106,6 +111,7 @@ const AddProduct = () => {
                   onChange={(e) => setQuantity(+e.target.value)}
                   className="inputField"
                   placeholder="الكمية"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -113,18 +119,21 @@ const AddProduct = () => {
                 <select
                   onChange={(e) => setCategoryId(+e.target.value)}
                   className="inputField"
+                  required
                 >
+                  <option disabled value="">
+                    اختر
+                  </option>
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}
                     </option>
                   ))}
                 </select>
-                {categoryId}
               </div>
               <div>
                 <button className="addCategoryBtn" disabled={loading}>
-                  {loading ? "loading" : "إضافة"}
+                  {loading ? <i className="fa-solid fa-spinner"></i> : "إضافة"}
                 </button>
               </div>
               <button

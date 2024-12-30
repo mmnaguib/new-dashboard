@@ -18,7 +18,7 @@ const BannerService = {
     }
 
     try {
-      await axiosInstance.post("Panners", formData, {
+      return await axiosInstance.post("Panners", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

@@ -25,13 +25,12 @@ const CategoryService = {
     }
 
     try {
-      const res = await axiosInstance.post("Categories", formData, {
+      return await axiosInstance.post("Categories", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
-      return res.data;
     } catch (err: any) {
       if (err.response && err.response.data) {
         const errors = err.response.data;
@@ -58,13 +57,12 @@ const CategoryService = {
     formData.append("description", description);
     if (image) formData.append("image", image);
     try {
-      const res = await axiosInstance.put(`Categories/${id}`, formData, {
+      return await axiosInstance.put(`Categories/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
-      return res.data;
     } catch (err: any) {
       if (err.response && err.response.data) {
         const errors = err.response.data;

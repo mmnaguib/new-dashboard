@@ -33,7 +33,7 @@ const RegisterNewAdmin = () => {
     }
     setLoading(true);
     try {
-      await axiosInstance.post(
+      const res = await axiosInstance.post(
         "Account/CreateAdminAccount",
         {
           email,
@@ -49,14 +49,16 @@ const RegisterNewAdmin = () => {
           },
         }
       );
-      setEmail("");
-      setFirstName("");
-      setPassword("");
-      setLastName("");
-      setPhone("");
-      setConfirmPass("");
-      toast.success("تم إضافة الادمن بنجاح ");
-      navigate("/admin");
+      if (res.status === 200) {
+        setEmail("");
+        setFirstName("");
+        setPassword("");
+        setLastName("");
+        setPhone("");
+        setConfirmPass("");
+        toast.success("تم إضافة الادمن بنجاح ");
+        navigate("/admin");
+      }
     } catch (err: any) {
       if (err.response && err.response.data) {
         const errors = err.response.data;
@@ -85,6 +87,7 @@ const RegisterNewAdmin = () => {
               className="inputField"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -95,6 +98,7 @@ const RegisterNewAdmin = () => {
               className="inputField"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              required
             />
           </div>
         </div>
@@ -107,6 +111,7 @@ const RegisterNewAdmin = () => {
               className="inputField"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -118,6 +123,7 @@ const RegisterNewAdmin = () => {
               className="inputField"
               value={phoneNumber}
               onChange={(e) => setPhone(e.target.value)}
+              required
             />
           </div>
         </div>
@@ -130,6 +136,7 @@ const RegisterNewAdmin = () => {
               className="inputField"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -140,6 +147,7 @@ const RegisterNewAdmin = () => {
               className="inputField"
               value={confirmPassword}
               onChange={(e) => setConfirmPass(e.target.value)}
+              required
             />
           </div>
         </div>
@@ -150,7 +158,7 @@ const RegisterNewAdmin = () => {
             disabled={loading}
             style={{ height: "50px !important" }}
           >
-            {loading ? "loading" : "تسجيل الدخول"}
+            {loading ? <i className="fa-solid fa-spinner"></i> : "تسجيل"}
           </button>
         </div>
       </form>

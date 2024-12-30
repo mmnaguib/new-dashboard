@@ -60,7 +60,7 @@ const CompleteOrder = () => {
 
         <div style={{ width: "200px", margin: "auto" }}>
           <button type="submit" className="btn submitBtn" disabled={loading}>
-            {loading ? "loading" : "سجل الطلب"}
+            {loading ? <i className="fa-solid fa-spinner"></i> : "سجل الطلب"}
           </button>
         </div>
       </form>

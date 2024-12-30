@@ -20,7 +20,7 @@ const AddCategory = () => {
     e.preventDefault();
     setLoading(true);
     const res = await CategoryService.addNewCategory(name, description, image);
-    if (res) {
+    if (res?.status === 200) {
       toast.success("تمت اضافة القسم بنجاح");
       window.location.reload();
       setLoading(false);
@@ -60,6 +60,7 @@ const AddCategory = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   className="inputField"
                   placeholder="اسم القسم"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -68,11 +69,12 @@ const AddCategory = () => {
                   type="file"
                   onChange={handleFileChange}
                   className="inputField"
+                  required
                 />
               </div>
               <div>
                 <button className="addCategoryBtn" disabled={loading}>
-                  {loading ? "loading" : "إضافة"}
+                  {loading ? <i className="fa-solid fa-spinner"></i> : "إضافة"}
                 </button>
               </div>
               <button

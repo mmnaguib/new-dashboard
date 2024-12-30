@@ -29,18 +29,15 @@ const EditCategory = ({
     e.preventDefault();
     setLoading(true);
     if (categoryToEdit?.id) {
-      try {
-        await CategoryService.updateCategory(
-          editID,
-          editName,
-          editDescription,
-          editImage
-        );
+      const res = await CategoryService.updateCategory(
+        editID,
+        editName,
+        editDescription,
+        editImage
+      );
+      if (res?.status === 200) {
         window.location.reload();
         toast.success("تم تعديل القسم بنجاح");
-      } catch (err: any) {
-        return toast(err.response?.data);
-      } finally {
         setLoading(false);
         setOpenEdit(false);
         setEditName("");
@@ -78,6 +75,7 @@ const EditCategory = ({
                   onChange={(e) => setEditDescription(e.target.value)}
                   className="inputField"
                   placeholder="اسم القسم"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -96,7 +94,7 @@ const EditCategory = ({
               </div>
               <div>
                 <button className="addCategoryBtn" disabled={loading}>
-                  {loading ? "loading" : "تعديل"}
+                  {loading ? <i className="fa-solid fa-spinner"></i> : "تعديل"}
                 </button>
               </div>
               <button

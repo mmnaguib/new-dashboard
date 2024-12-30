@@ -63,6 +63,7 @@ const Login = () => {
               className="inputField"
               placeholder="البريد الالكتروني"
               style={{ direction: "ltr" }}
+              required
             />
           </div>
           <div className="form-group">
@@ -74,10 +75,11 @@ const Login = () => {
               className="inputField"
               placeholder="كلمة المرور"
               style={{ direction: "ltr" }}
+              required
             />
           </div>
           <button type="submit" className="btn submitBtn" disabled={loading}>
-            {loading ? "loading" : "تسجيل الدخول"}
+            {loading ? <i className="fa-solid fa-spinner"></i> : "تسجيل الدخول"}
           </button>
         </form>
       </div>

@@ -3,7 +3,6 @@ import ProductService from "../../services/productService";
 import { IProductProps } from "../../interface";
 import "./homeProducts.css";
 import CartService from "../../services/cartService";
-import { toast } from "react-toastify";
 const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
   const [products, setProducts] = useState<IProductProps[]>([]);
   const isLoggedIn = !!localStorage.getItem("authToken");
@@ -64,7 +63,11 @@ const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
                   className="cartBtn"
                   disabled={!!loading[product.id]}
                 >
-                  {!loading[product.id] ? "إضافة الي السلة" : "loading"}
+                  {!loading[product.id] ? (
+                    "إضافة الي السلة"
+                  ) : (
+                    <i className="fa-solid fa-spinner"></i>
+                  )}
                 </button>
               )}
             </div>

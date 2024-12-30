@@ -52,9 +52,12 @@ const AdminBanners = () => {
   const addImageHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
-    await BannerService.addNewImage(image);
-    toast.success("تم اضافة الصورة بنجاح");
-    window.location.reload();
+    const res = await BannerService.addNewImage(image);
+    if (res?.status === 200) {
+      toast.success("تم اضافة الصورة بنجاح");
+      window.location.reload();
+    }
+
     setLoading(false);
     setAddImage(false);
   };
@@ -73,16 +76,17 @@ const AdminBanners = () => {
           <div className="popupContent">
             <form onSubmit={addImageHandler}>
               <div className="form-group">
-                <label>صورة القسم</label>
+                <label>صورة الواجهة</label>
                 <input
                   type="file"
                   onChange={handleFileChange}
                   className="inputField"
+                  required
                 />
               </div>
               <div>
                 <button className="addCategoryBtn" disabled={loading}>
-                  {loading ? "loading" : "إضافة"}
+                  {loading ? <i className="fa-solid fa-spinner"></i> : "إضافة"}
                 </button>
               </div>
             </form>
@@ -111,7 +115,7 @@ const AdminBanners = () => {
               </div>
               <div>
                 <button className="addCategoryBtn" disabled={loading}>
-                  {loading ? "loading" : "إضافة"}
+                  {loading ? <i className="fa-solid fa-spinner"></i> : "إضافة"}
                 </button>
               </div>
             </form>

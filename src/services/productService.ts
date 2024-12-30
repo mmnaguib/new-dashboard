@@ -36,7 +36,7 @@ const ProductService = {
     }
 
     try {
-      await axiosInstance.post("Product", formData, {
+      return await axiosInstance.post("Product", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
