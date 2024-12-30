@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CategoryService from "../../../services/categoryService";
-import { IEditPopupProps } from "../../../interface";
+import { ICategoryProps, IEditPopupProps } from "../../../interface";
 import { toast } from "react-toastify";
 
 const EditCategory = ({
@@ -15,6 +15,7 @@ const EditCategory = ({
   setEditName,
   setEditDescription,
   setEditImage,
+  setCategories,
 }: IEditPopupProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -36,7 +37,11 @@ const EditCategory = ({
         editImage
       );
       if (res?.status === 200) {
-        window.location.reload();
+        setCategories((prevCategories: ICategoryProps[]) =>
+          prevCategories.map((category) =>
+            category.id === editID ? { ...category, ...res.data } : category
+          )
+        );
         toast.success("تم تعديل القسم بنجاح");
         setLoading(false);
         setOpenEdit(false);

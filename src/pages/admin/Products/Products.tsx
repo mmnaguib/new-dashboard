@@ -34,7 +34,7 @@ const AdminProducts = () => {
   };
   return (
     <div>
-      <AddProduct />
+      <AddProduct setProducts={setProducts} />
       <table border={1} className="tableShow">
         <thead>
           <tr>

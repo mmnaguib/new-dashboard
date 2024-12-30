@@ -55,7 +55,10 @@ const AdminBanners = () => {
     const res = await BannerService.addNewImage(image);
     if (res?.status === 200) {
       toast.success("تم اضافة الصورة بنجاح");
-      window.location.reload();
+      setBanners((prevCategories: IBannerProps[]) => [
+        ...prevCategories,
+        res.data,
+      ]);
     }
 
     setLoading(false);

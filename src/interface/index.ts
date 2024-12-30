@@ -10,7 +10,7 @@ export interface ILoginResponse {
 export interface ICategoryProps {
   id: number;
   image: string;
-  userId: string;
+  userId?: string;
   products?: IProductProps[];
   name: string;
   description: string;
@@ -41,6 +41,7 @@ export interface IEditPopupProps {
   setEditName: (val: string) => void;
   setEditDescription: (val: string) => void;
   setEditImage: (val: File | null) => void;
+  setCategories: React.Dispatch<React.SetStateAction<ICategoryProps[]>>;
 }
 
 export interface ICartProps {

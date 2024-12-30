@@ -58,7 +58,7 @@ const AdminCategories = () => {
 
   return (
     <div>
-      <AddCategory />
+      <AddCategory setCategories={setCategories} />
       <EditCategory
         categoryToEdit={categoryToEdit}
         openEdit={openEdit}
@@ -71,6 +71,7 @@ const AdminCategories = () => {
         setEditDescription={setEditDescription}
         editImage={editImage}
         setEditImage={setEditImage}
+        setCategories={setCategories}
       />
       <table border={1} className="tableShow">
         <thead>

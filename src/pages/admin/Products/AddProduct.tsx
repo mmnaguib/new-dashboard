@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { ICategoryProps } from "../../../interface";
+import { ICategoryProps, IProductProps } from "../../../interface";
 import ProductService from "../../../services/productService";
 import CategoryService from "../../../services/categoryService";
 
-const AddProduct = () => {
+const AddProduct = ({
+  setProducts,
+}: {
+  setProducts: React.Dispatch<React.SetStateAction<IProductProps[]>>;
+}) => {
   const [title, setTitle] = useState<string>("");
   const [openNew, setOpenNew] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
@@ -33,7 +37,10 @@ const AddProduct = () => {
       categoryId
     );
     if (res?.status === 200) {
-      window.location.reload();
+      setProducts((prevCategories: IProductProps[]) => [
+        ...prevCategories,
+        res.data,
+      ]);
       toast.success("تمت اضافة القسم بنجاح");
       setLoading(false);
       setOpenNew(false);

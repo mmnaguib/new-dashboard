@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import CategoryService from "../../../services/categoryService";
+import { ICategoryProps } from "../../../interface";
 
-const AddCategory = () => {
+const AddCategory = ({
+  setCategories,
+}: {
+  setCategories: React.Dispatch<React.SetStateAction<ICategoryProps[]>>;
+}) => {
   const [name, setCatName] = useState<string>("");
   const [openNew, setOpenNew] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
@@ -22,7 +27,12 @@ const AddCategory = () => {
     const res = await CategoryService.addNewCategory(name, description, image);
     if (res?.status === 200) {
       toast.success("تمت اضافة القسم بنجاح");
-      window.location.reload();
+
+      setCategories((prevCategories: ICategoryProps[]) => [
+        ...prevCategories,
+        res.data,
+      ]);
+
       setLoading(false);
       setOpenNew(false);
       setCatName("");
