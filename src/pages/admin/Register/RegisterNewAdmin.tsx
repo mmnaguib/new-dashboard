@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "./register.css";
 import axiosInstance from "../../../utils/AxiosInstance";
+import { useNavigate } from "react-router-dom";
 const RegisterNewAdmin = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -10,6 +11,7 @@ const RegisterNewAdmin = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPass] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const token = localStorage.getItem("authToken");
   const addNewAdmin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -54,8 +56,18 @@ const RegisterNewAdmin = () => {
       setPhone("");
       setConfirmPass("");
       toast.success("تم إضافة الادمن بنجاح ");
-    } catch (err) {
-      console.log(err);
+      navigate("/admin");
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${errors[field]}`);
+          }
+        });
+      }
     } finally {
       setLoading(false);
     }

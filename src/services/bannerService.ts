@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../utils/AxiosInstance";
 const token = localStorage.getItem("authToken");
 
@@ -6,7 +7,7 @@ const BannerService = {
     const req = await axiosInstance
       .get("Panners")
       .then((res) => res.data)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     return req;
   },
 
@@ -23,18 +24,40 @@ const BannerService = {
           Authorization: `Bearer ${token}`,
         },
       });
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
     }
   },
 
   removeImage: async (id: number) => {
-    await axiosInstance.delete(`Panners/${id}`, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      await axiosInstance.delete(`Panners/${id}`, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
+    }
   },
 };
 

@@ -1,19 +1,21 @@
-.formGroupContent{
-    display: flex;
-    gap: 15px;
+.formGroupContent {
+  display: flex;
+  gap: 15px;
 }
 
-
-.formGroupContent > div{
-    flex-grow: 1;
+.formGroupContent > div {
+  flex-grow: 1;
 }
 
-.registrationForm{
-    width: 80%;
-    border-radius: 8px;
-    background: #fff;
-    padding: 15px;
-    margin: 15px auto 0;
+.registrationForm {
+  width: 80%;
+  border-radius: 8px;
+  background: #fff;
+  padding: 15px;
+  margin: 15px auto 0;
+  height: 530px;
 }
 
-.registrationForm h1{text-align: center;}
+.registrationForm h1 {
+  text-align: center;
+}

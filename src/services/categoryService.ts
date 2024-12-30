@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../utils/AxiosInstance";
 const token = localStorage.getItem("authToken");
 const user = localStorage.getItem("user");
@@ -6,7 +7,7 @@ const CategoryService = {
     const req = axiosInstance
       .get("Categories")
       .then((res) => res.data)
-      .catch((err) => err.response.data);
+      .catch((err) => toast.error(err));
     return req;
   },
 
@@ -32,11 +33,16 @@ const CategoryService = {
       });
       return res.data;
     } catch (err: any) {
-      console.error(
-        "Error adding category:",
-        err.response?.data || err.message
-      );
-      return err.response?.data;
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${errors[field]}`);
+          }
+        });
+      }
     }
   },
 
@@ -60,27 +66,45 @@ const CategoryService = {
       });
       return res.data;
     } catch (err: any) {
-      console.error(
-        "Error adding category:",
-        err.response?.data || err.message
-      );
-      return err.response?.data;
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
     }
   },
 
   deleteCategory: async (id: number) => {
-    await axiosInstance.delete(`Categories/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      await axiosInstance.delete(`Categories/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
+    }
   },
 
   getCategory: async (id: number) => {
     const req = await axiosInstance
       .get(`categories/${id}`)
       .then((res) => res.data)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     return req;
   },
 };

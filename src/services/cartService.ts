@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../utils/AxiosInstance";
 const CartService = {
   getUserCart: async (userId: string) => {
@@ -5,7 +6,7 @@ const CartService = {
     const req = await axiosInstance
       .get(`ShoppingCart/${userId}`)
       .then((res) => res.data)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     return req;
   },
   addProductToCart: async (
@@ -18,18 +19,52 @@ const CartService = {
         `ShoppingCart/add?userId=${userId}&productId=${productId}&quantity=${quantity}`
       );
       return res.data;
-    } catch (err) {
-      console.error("Error adding product to cart:", err);
-      throw err;
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
     }
   },
 
   deleteItemFromQuantity: async (id: number) => {
-    await axiosInstance.delete(`ShoppingCart/remove/${id}`);
+    try {
+      await axiosInstance.delete(`ShoppingCart/remove/${id}`);
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
+    }
   },
 
   updateItemQuantity: async (id: number, quantity: number) => {
-    await axiosInstance.put(`ShoppingCart/update/${id}?quantity=${quantity}`);
+    try {
+      await axiosInstance.put(`ShoppingCart/update/${id}?quantity=${quantity}`);
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
+    }
   },
 };
 

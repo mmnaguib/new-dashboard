@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../utils/AxiosInstance";
 
 const UserService = {
@@ -5,7 +6,7 @@ const UserService = {
     const req = await axiosInstance
       .get(`Account/${userId}`)
       .then((res) => res.data)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     return req;
   },
 

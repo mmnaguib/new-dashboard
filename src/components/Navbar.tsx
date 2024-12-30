@@ -60,7 +60,10 @@ const Navbar = () => {
             <div className="userListContent">
               <span className="username">{user?.name}</span>
               <br />
-              <Link to="my-orders">طلباتي</Link> <br />
+              <Link to="my-orders" onClick={() => setUserList(false)}>
+                طلباتي
+              </Link>{" "}
+              <br />
               <button className="logout" onClick={logoutHandler}>
                 تسجيل الخروج
               </button>

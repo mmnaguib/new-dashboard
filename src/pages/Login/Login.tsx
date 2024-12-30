@@ -62,6 +62,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="inputField"
               placeholder="البريد الالكتروني"
+              style={{ direction: "ltr" }}
             />
           </div>
           <div className="form-group">
@@ -72,6 +73,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="inputField"
               placeholder="كلمة المرور"
+              style={{ direction: "ltr" }}
             />
           </div>
           <button type="submit" className="btn submitBtn" disabled={loading}>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import OrderService from "../../services/orderService";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CompleteOrder = () => {
   const userId = JSON.parse(localStorage.getItem("user")!).userId;
@@ -24,8 +25,8 @@ const CompleteOrder = () => {
         phoneNumebr
       );
       navigate("/payment");
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      return toast(err.response?.data);
     } finally {
       setLoading(false);
     }

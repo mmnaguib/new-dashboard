@@ -12,6 +12,7 @@
   justify-content: space-between;
   align-items: center;
   direction: rtl;
+  z-index: 1;
 }
 .allNavbar {
   margin-right: 0;
@@ -45,6 +46,7 @@
   color: #000;
   width: 150px;
   font-weight: bold;
+  box-shadow: 0 0 5px 5px #eaeaea;
 }
 .userListContent a {
   color: #000;
@@ -101,4 +103,8 @@
   line-height: 20px;
   padding: 0 5px;
   border-radius: 4px;
+}
+
+.swiper {
+  z-index: 0 !important;
 }

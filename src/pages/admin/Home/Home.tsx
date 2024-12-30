@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import CategoryService from "../../../services/categoryService";
 import ProductService from "../../../services/productService";
 import BannerService from "../../../services/bannerService";
+import OrderService from "../../../services/orderService";
 const AdminHome = () => {
   const [categoryNumber, setCategoryNumber] = useState(0);
   const [productNumber, setProductNumber] = useState(0);
   const [bannerNumber, setBannerNumber] = useState(0);
+  const [ordersNumber, setOrdersNumber] = useState(0);
   const numbers = async () => {
     const categories = await CategoryService.getAllCategories();
     setCategoryNumber(categories.length);
@@ -15,6 +17,8 @@ const AdminHome = () => {
     setProductNumber(products.length);
     const banners = await BannerService.getAllBanners();
     setBannerNumber(banners.length);
+    const orders = await OrderService.getAllOrders("Pending");
+    setOrdersNumber(orders.length);
   };
   useEffect(() => {
     numbers();
@@ -27,7 +31,7 @@ const AdminHome = () => {
         <Link to="/admin/categories">أقسام</Link>
       </div>
       <div className="homeCard users">
-        <h1>10</h1>
+        <h1>{ordersNumber}</h1>
         <i className="fa-solid fa-home fa-lg"></i>
         <Link to="/admin/orders">طلب</Link>
       </div>

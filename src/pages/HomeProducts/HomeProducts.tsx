@@ -3,6 +3,7 @@ import ProductService from "../../services/productService";
 import { IProductProps } from "../../interface";
 import "./homeProducts.css";
 import CartService from "../../services/cartService";
+import { toast } from "react-toastify";
 const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
   const [products, setProducts] = useState<IProductProps[]>([]);
   const isLoggedIn = !!localStorage.getItem("authToken");
@@ -16,14 +17,9 @@ const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
     quantity: number
   ) => {
     setLoading((prev) => ({ ...prev, [productId]: true }));
-    try {
-      if (!userId) return;
-      await CartService.addProductToCart(userId, productId, quantity);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading((prev) => ({ ...prev, [productId]: false }));
-    }
+    if (!userId) return;
+    await CartService.addProductToCart(userId, productId, quantity);
+    setLoading((prev) => ({ ...prev, [productId]: false }));
   };
   const featchProducts = useCallback(async (id: number | null) => {
     let res;

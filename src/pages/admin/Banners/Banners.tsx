@@ -52,16 +52,11 @@ const AdminBanners = () => {
   const addImageHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      await BannerService.addNewImage(image);
-      toast.success("تم اضافة الصورة بنجاح");
-      window.location.reload();
-    } catch (err) {
-      console.log("err add banner" + err);
-    } finally {
-      setLoading(false);
-      setAddImage(false);
-    }
+    await BannerService.addNewImage(image);
+    toast.success("تم اضافة الصورة بنجاح");
+    window.location.reload();
+    setLoading(false);
+    setAddImage(false);
   };
 
   return (

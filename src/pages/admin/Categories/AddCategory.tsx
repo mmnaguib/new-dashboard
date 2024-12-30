@@ -19,19 +19,18 @@ const AddCategory = () => {
   const addCategoryHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      await CategoryService.addNewCategory(name, description, image);
-      window.location.reload();
+    const res = await CategoryService.addNewCategory(name, description, image);
+    if (res) {
       toast.success("تمت اضافة القسم بنجاح");
-    } catch (err) {
-      console.log(err);
-    } finally {
+      window.location.reload();
       setLoading(false);
       setOpenNew(false);
       setCatName("");
       setDescription("");
       setImage(null);
     }
+
+    setLoading(false);
   };
   return (
     <>

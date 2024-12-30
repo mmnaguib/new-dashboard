@@ -24,28 +24,23 @@ const AddProduct = () => {
   const addProductHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      await ProductService.addNewProduct(
-        title,
-        description,
-        image,
-        price,
-        qunatity,
-        categoryId
-      );
-      window.location.reload();
-      toast.success("تمت اضافة القسم بنجاح");
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-      setOpenNew(false);
-      setTitle("");
-      setDescription("");
-      setPrice(0);
-      setQuantity(0);
-      setImage(null);
-    }
+    await ProductService.addNewProduct(
+      title,
+      description,
+      image,
+      price,
+      qunatity,
+      categoryId
+    );
+    window.location.reload();
+    toast.success("تمت اضافة القسم بنجاح");
+    setLoading(false);
+    setOpenNew(false);
+    setTitle("");
+    setDescription("");
+    setPrice(0);
+    setQuantity(0);
+    setImage(null);
   };
 
   const getAllCatgories = async () => {

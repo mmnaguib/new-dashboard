@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../utils/AxiosInstance";
 const token = localStorage.getItem("authToken");
 
@@ -10,7 +11,7 @@ const OrderService = {
         },
       })
       .then((res) => res.data)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     return req;
   },
   addNewOrder: async (
@@ -19,13 +20,25 @@ const OrderService = {
     shippingAddress: string,
     phoneNumebr: string
   ) => {
-    const req = await axiosInstance.post(`Orders`, {
-      userId,
-      shoppingCartId,
-      shippingAddress,
-      phoneNumebr,
-    });
-    console.log(req);
+    try {
+      await axiosInstance.post(`Orders`, {
+        userId,
+        shoppingCartId,
+        shippingAddress,
+        phoneNumebr,
+      });
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
+    }
   },
 };
 

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../utils/AxiosInstance";
 
 const token = localStorage.getItem("authToken");
@@ -9,7 +10,7 @@ const ProductService = {
       .get("Product")
       .then((res) => res.data.items)
       .catch((err) => {
-        console.log(err);
+        toast(err.response?.data);
       });
     return req;
   },
@@ -35,26 +36,46 @@ const ProductService = {
     }
 
     try {
-      const res = await axiosInstance.post("Product", formData, {
+      await axiosInstance.post("Product", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data);
     } catch (err: any) {
-      console.error("Error adding Product:", err.response?.data || err.message);
-      return err.response?.data;
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
     }
   },
 
   deleteProduct: async (id: number) => {
-    await axiosInstance.delete(`Product/${id}`, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      await axiosInstance.delete(`Product/${id}`, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${field} Error: ${errors[field]}`);
+          }
+        });
+      }
+    }
   },
 
   getAllProductsAccourdingToCategory: async (id: number) => {
@@ -62,7 +83,7 @@ const ProductService = {
       .get(`Product?categoryID=${id}`)
       .then((res) => res.data.items)
       .catch((err) => {
-        console.log(err);
+        return toast.error(err.response?.data);
       });
     return req;
   },

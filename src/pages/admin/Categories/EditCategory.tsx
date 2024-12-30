@@ -38,8 +38,8 @@ const EditCategory = ({
         );
         window.location.reload();
         toast.success("تم تعديل القسم بنجاح");
-      } catch (err) {
-        console.log(err);
+      } catch (err: any) {
+        return toast(err.response?.data);
       } finally {
         setLoading(false);
         setOpenEdit(false);
@@ -48,7 +48,7 @@ const EditCategory = ({
         setEditImage(null);
       }
     } else {
-      console.log("مفيش id");
+      toast.error("No exist id");
     }
   };
 
