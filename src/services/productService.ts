@@ -49,7 +49,7 @@ const ProductService = {
           if (Array.isArray(errors[field])) {
             errors[field].forEach((msg: string) => toast.error(msg));
           } else {
-            toast.error(`${field} Error: ${errors[field]}`);
+            toast.error(`${errors[field]}`);
           }
         });
       }
@@ -71,7 +71,7 @@ const ProductService = {
           if (Array.isArray(errors[field])) {
             errors[field].forEach((msg: string) => toast.error(msg));
           } else {
-            toast.error(`${field} Error: ${errors[field]}`);
+            toast.error(`${errors[field]}`);
           }
         });
       }
