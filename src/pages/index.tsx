@@ -8,11 +8,11 @@ const Home = () => {
     null
   );
   return (
-    <div style={{ height: "5000px" }}>
+    <>
       <ImageSlider />
       <Categories setSelectedCategoryId={setSelectedCategoryId} />
       <HomeProducts categoryId={selectedCategoryId} />
-    </div>
+    </>
   );
 };
 

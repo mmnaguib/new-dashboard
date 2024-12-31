@@ -44,3 +44,9 @@
   transform: translateY(-50%);
   color: #7a550f;
 }
+
+.continueShopping {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 20px;
+}

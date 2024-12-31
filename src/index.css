@@ -1,18 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
-*{
-  font-family: 'Tajawal';
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+* {
+  font-family: "Tajawal";
   box-sizing: border-box;
 }
-:root{
+:root {
   --sidebarWidth: 200px;
-  --navbarWidth: 40px
+  --navbarWidth: 40px;
 }
 body {
   margin: 0;
-  font-family: 'Tajawal';
+  font-family: "Tajawal";
   direction: rtl;
   text-align: right;
   background-color: #f5f5f5;
 }
-.content{margin-top: var(--navbarWidth);margin-right: var(--sidebarWidth);padding: 10px;}
-.allContent{margin-top: var(--navbarWidth);}
+.content {
+  margin-top: var(--navbarWidth);
+  margin-right: var(--sidebarWidth);
+  padding: 10px;
+}
+.allContent {
+  margin-top: var(--navbarWidth);
+}
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.945);
+  z-index: 9999;
+}
+
+.loader {
+  width: 250px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: helvetica, arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #f00;
+  letter-spacing: 0.2em;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: #f00;
+  position: absolute;
+  animation: load 0.7s infinite alternate ease-in-out;
+}
+
+.loader::before {
+  top: 0;
+}
+
+.loader::after {
+  bottom: 0;
+}

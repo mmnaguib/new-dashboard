@@ -56,6 +56,11 @@ const EditCategory = ({
 
   return (
     <>
+      {loading && (
+        <div className="loader-overlay visible">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       {openEdit && (
         <div className="addCategoryPopup">
           <div className="popupContent">

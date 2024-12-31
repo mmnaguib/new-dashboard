@@ -5,9 +5,13 @@ import ProductService from "../../../services/productService";
 import { IProductProps } from "../../../interface";
 const AdminProducts = () => {
   const [products, setProducts] = useState<IProductProps[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const getAll = async () => {
+    setLoading(true);
     const res = await ProductService.getAllProducts();
     setProducts(res);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -33,7 +37,12 @@ const AdminProducts = () => {
     });
   };
   return (
-    <div>
+    <>
+      {loading && (
+        <div className="loader-overlay visible">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       <AddProduct setProducts={setProducts} />
       <table border={1} className="tableShow">
         <thead>
@@ -75,7 +84,7 @@ const AdminProducts = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

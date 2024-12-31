@@ -67,6 +67,11 @@ const AdminBanners = () => {
 
   return (
     <>
+      {loading && (
+        <div className="loader-overlay visible">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       {banners.length === 4 ? (
         "لقد تجاوزت الحد الاقصي من الصور لا تستطيع اضافة المزيد "
       ) : (

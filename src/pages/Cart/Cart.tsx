@@ -3,12 +3,19 @@ import CartService from "../../services/cartService";
 import { ICartProps } from "../../interface";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useCart } from "../../utils/CartProvider";
+import Alert from "../../components/Alert/Alert";
 const Cart = () => {
   const userTempId = JSON.parse(localStorage.getItem("user")!).userId;
   const [cartProducts, setCartProducts] = useState<ICartProps | null>(null);
+  const { setCartCount } = useCart();
+  const [loading, setLoading] = useState(false);
+
   const getCart = async (userId: string) => {
+    setLoading(true);
     const res = await CartService.getUserCart(userId);
     setCartProducts(res);
+    setLoading(false);
   };
 
   const deleteHandler = async (id: number) => {
@@ -36,6 +43,11 @@ const Cart = () => {
             items: updatedItems,
             totalPrice: updatedTotalPrice,
           };
+        });
+        setCartCount((prev) => {
+          const newCount = prev - 1;
+          localStorage.setItem("cartCount", newCount.toString());
+          return newCount;
         });
       }
     });
@@ -85,6 +97,11 @@ const Cart = () => {
   }, [userTempId]);
   return (
     <>
+      {loading && (
+        <div className="loader-overlay visible">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       {cartProducts?.items.length ? (
         <>
           <table border={1} className="tableShow">
@@ -179,8 +196,12 @@ const Cart = () => {
         </>
       ) : (
         <div>
-          <p>لا يوجد منتجات في السلة</p>
-          <Link to="/">ارجع للتصفح</Link>
+          <Alert type="info">
+            <span>لا يوجد منتجات في السلة</span>
+            <Link to="/" className="continueShopping">
+              اكمل تسوق <i className="fa-solid fa-arrow-left"></i>
+            </Link>
+          </Alert>
         </div>
       )}
     </>

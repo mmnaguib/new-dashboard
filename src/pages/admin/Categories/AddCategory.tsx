@@ -44,6 +44,11 @@ const AddCategory = ({
   };
   return (
     <>
+      {loading && (
+        <div className="loader-overlay visible">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       <button onClick={() => setOpenNew(true)} className="addBtn">
         <i className="fa-solid fa-plus"></i>
       </button>

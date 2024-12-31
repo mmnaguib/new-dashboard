@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import "./Slider.css";
 const ImageSlider = () => {
   const [banners, setBanners] = useState<IBannerProps[]>([]);
+
   const fetchBanners = useCallback(async () => {
     const res = await BannerService.getAllBanners();
     setBanners(res);

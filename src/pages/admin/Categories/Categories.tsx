@@ -11,6 +11,7 @@ const AdminCategories = () => {
   const [categoryToEdit, setCategoryToEdit] = useState<ICategoryProps | null>(
     null
   );
+  const [loading, setLoading] = useState(false);
 
   const [openEdit, setOpenEdit] = useState(false);
 
@@ -20,8 +21,10 @@ const AdminCategories = () => {
   const [editImage, setEditImage] = useState<File | null>(null);
 
   const getAll = async () => {
+    setLoading(true);
     const res = await CategoryService.getAllCategories();
     setCategories(res);
+    setLoading(false);
   };
 
   const deleteHandler = async (id: number) => {
@@ -57,7 +60,12 @@ const AdminCategories = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      {loading && (
+        <div className="loader-overlay visible">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       <AddCategory setCategories={setCategories} />
       <EditCategory
         categoryToEdit={categoryToEdit}
@@ -110,7 +118,7 @@ const AdminCategories = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

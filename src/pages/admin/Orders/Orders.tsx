@@ -5,9 +5,13 @@ import OrderService from "../../../services/orderService";
 const AdminOrders = () => {
   const [orders, setOrders] = useState<IOrderProps[]>([]);
   const [selectedVal, setSelectedVal] = useState<string>("Pending");
+  const [loading, setLoading] = useState(false);
+
   const getAllOrders = useCallback(async (status: string) => {
+    setLoading(true);
     const res = await OrderService.getAllOrders(status);
     setOrders(res);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -15,6 +19,11 @@ const AdminOrders = () => {
   }, [getAllOrders, selectedVal]);
   return (
     <>
+      {loading && (
+        <div className="loader-overlay visible">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       <table border={1} className="tableShow">
         <thead>
           <tr>
