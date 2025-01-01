@@ -14,6 +14,7 @@ const OrderService = {
       .catch((err) => toast.error(err));
     return req;
   },
+
   addNewOrder: async (
     userId: string,
     shoppingCartId: number,
@@ -47,6 +48,40 @@ const OrderService = {
       .then((res) => res.data)
       .catch((err) => toast.error(err));
     return req;
+  },
+
+  updateOrderStatus: async (orderId: string) => {
+    try {
+      return await axiosInstance.put(`Orders/CancellOrder/${orderId}`);
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${errors[field]}`);
+          }
+        });
+      }
+    }
+  },
+
+  cancelOrder: async (orderId: string) => {
+    try {
+      return await axiosInstance.put(`Orders/Cancel/${orderId}`);
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${errors[field]}`);
+          }
+        });
+      }
+    }
   },
 };
 

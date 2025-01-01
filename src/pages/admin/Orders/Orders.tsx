@@ -2,7 +2,8 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { IOrderProps } from "../../../interface";
 import OrderService from "../../../services/orderService";
 import Alert from "../../../components/Alert/Alert";
-
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 const AdminOrders = () => {
   const [orders, setOrders] = useState<IOrderProps[]>([]);
   const [selectedVal, setSelectedVal] = useState<string>("Pending");
@@ -19,9 +20,39 @@ const AdminOrders = () => {
     setLoading(false);
   }, []);
 
+  const deleteHandler = async (orderId: string) => {
+    await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        OrderService.cancelOrder(orderId);
+        setOrders((prevOrders) =>
+          prevOrders.filter((order) => order.orderId !== orderId)
+        );
+        toast.success("Order has been cancelled successfully!");
+      }
+    });
+  };
+
   useEffect(() => {
     getAllOrders(selectedVal);
   }, [getAllOrders, selectedVal]);
+
+  const updateStatus = async (orderId: string) => {
+    OrderService.updateOrderStatus(orderId);
+    setOrders((prevOrders: IOrderProps[]) =>
+      prevOrders.map((order) =>
+        order.orderId === orderId ? { ...order, status: "paid" } : order
+      )
+    );
+  };
+
   return (
     <>
       {loading && (
@@ -96,8 +127,13 @@ const AdminOrders = () => {
                 <th>العنوان</th>
                 <th>التاريخ</th>
                 <th>السعر</th>
-                <th>الحالة</th>
+                {selectedVal !== "Cancelled" && selectedVal !== "Received" && (
+                  <th>الحالة</th>
+                )}
                 <th>المستخدم</th>
+                {selectedVal !== "Cancelled" && selectedVal !== "Received" && (
+                  <th>cancel</th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -117,8 +153,27 @@ const AdminOrders = () => {
                     <th>{order.shippingAddress}</th>
                     <th>{order.orderDate.slice(0, 10)}</th>
                     <th>{order.totalAmount}</th>
-                    <th>{order.status}</th>
+                    {selectedVal !== "Cancelled" &&
+                      selectedVal !== "Received" && (
+                        <th>
+                          <button onClick={() => updateStatus(order.orderId)}>
+                            {order.status}
+                          </button>
+                        </th>
+                      )}
                     <th>{order.userName}</th>
+                    {selectedVal !== "Cancelled" &&
+                      selectedVal !== "Received" && (
+                        <th>
+                          <button
+                            className="delete actionsBtn"
+                            onClick={() => deleteHandler(order.orderId)}
+                            style={{ width: "fit-content" }}
+                          >
+                            Cancel
+                          </button>
+                        </th>
+                      )}
                   </tr>
                 ))}
             </tbody>
