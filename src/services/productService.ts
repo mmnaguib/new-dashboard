@@ -56,6 +56,45 @@ const ProductService = {
     }
   },
 
+  updateProduct: async (
+    id: number,
+    title: string,
+    description: string,
+    price: number,
+    quantity: number,
+    category: string,
+    image: File | null
+  ) => {
+    const formData = new FormData();
+    formData.append("id", id.toString());
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price.toString());
+    formData.append("Quantity", quantity.toString());
+    formData.append("categoryId", category.toString());
+    formData.append("userId", user ? JSON.parse(user).userId : "");
+    if (image) formData.append("image", image);
+    try {
+      return await axiosInstance.put(`Product/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (err: any) {
+      if (err.response && err.response.data) {
+        const errors = err.response.data;
+        Object.keys(errors).forEach((field) => {
+          if (Array.isArray(errors[field])) {
+            errors[field].forEach((msg: string) => toast.error(msg));
+          } else {
+            toast.error(`${errors[field]}`);
+          }
+        });
+      }
+    }
+  },
+
   deleteProduct: async (id: number) => {
     try {
       await axiosInstance.delete(`Product/${id}`, {

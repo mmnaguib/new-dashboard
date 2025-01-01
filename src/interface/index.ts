@@ -81,3 +81,24 @@ export interface IOrderItem {
   unitPrice: number;
   totalPrice: number;
 }
+
+export interface IEditProductPopupProps {
+  productToEdit: IProductProps | null;
+  openEdit: boolean;
+  setOpenEdit: (val: boolean) => void;
+  editID: number;
+  editTitle: string;
+  editDescription: string;
+  editImage: File | null;
+  setEditID: (val: number) => void;
+  setEditTitle: (val: string) => void;
+  setEditDescription: (val: string) => void;
+  setEditImage: (val: File | null) => void;
+  editPrice: number;
+  setEditPrice: (val: number) => void;
+  editQuantity: number;
+  setEditQuantity: (val: number) => void;
+  editCategory: string;
+  setEditCategory: (val: string) => void;
+  setProducts: React.Dispatch<React.SetStateAction<IProductProps[]>>;
+}
