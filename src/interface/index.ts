@@ -63,7 +63,7 @@ export interface IOrderProps {
   orderId: string;
   userId: string;
   orderDate: string;
-  totalAmunt: number;
+  totalAmount: number;
   shippingAddress: string;
   status: string;
   createdDate: string;

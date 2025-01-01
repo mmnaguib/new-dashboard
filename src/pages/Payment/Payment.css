@@ -1,0 +1,90 @@
+.invoiceReport {
+  width: 500px;
+  margin: auto;
+  box-shadow: 0 0 1px 1px #eaeaea;
+  padding: 10px;
+  font-weight: bold;
+  margin-top: 70px;
+}
+
+.invoiceReport h1 {
+  text-align: center;
+  margin: 0;
+}
+
+.invoiceReport span.aboveTable {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.order-grid {
+  display: grid;
+  grid-template-rows: auto auto;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.grid-header {
+  display: grid;
+  grid-template-columns: 50px 1fr 100px 100px;
+  font-weight: bold;
+  background-color: #d3d1d1;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  font-size: 22px;
+}
+
+.grid-header > span {
+  border-left: 1px solid #fff;
+  display: inline-block;
+  padding: 5px;
+}
+
+.grid-body {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 50px 1fr 100px 100px;
+  font-size: 22px;
+}
+
+.grid-body > div {
+  border: 1px solid #f1f1f1;
+  padding: 5px;
+}
+
+.total-price {
+  grid-column: span 4;
+  font-weight: bold;
+  border: 0;
+  text-align: left;
+  background: #d3d1d1;
+  width: fit-content;
+  padding: 10px;
+  font-size: 20px;
+  margin: 0 auto 10px 0;
+}
+
+.total-price span {
+  color: #f00;
+}
+
+.ownerConnection {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ownerConnection li {
+  font-size: 22px;
+  margin: 10px;
+}
+
+.ownerConnection li i {
+  border-radius: 50%;
+  border: 1px solid #d3d1d1;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+}

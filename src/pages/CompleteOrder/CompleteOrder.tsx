@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderService from "../../services/orderService";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import UserService from "../../services/userServices";
 
 const CompleteOrder = () => {
   const userId = JSON.parse(localStorage.getItem("user")!).userId;
@@ -11,26 +12,43 @@ const CompleteOrder = () => {
   const location = useLocation();
   const { shoppingCartId, fromSource } = location.state || {};
   const navigate = useNavigate();
-  if (!fromSource) {
-    return <Navigate to="/" />;
-  }
+
+  const getUserPhone = async (userId: string) => {
+    try {
+      const res = await UserService.getUserData(userId);
+      setPhoneNumber(res.phoneNumber);
+    } catch (err) {
+      console.error("Failed to fetch user data", err);
+    }
+  };
+
   const formHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await OrderService.addNewOrder(
+      const res = await OrderService.addNewOrder(
         userId,
         shoppingCartId,
         shippingAddress,
         phoneNumebr
       );
-      navigate("/payment");
+      console.log(res?.data);
+      navigate("/payment", { state: res });
     } catch (err: any) {
-      return toast(err.response?.data);
+      toast(err.response?.data || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    getUserPhone(userId);
+  }, [userId]);
+
+  if (!fromSource) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="order-Form">
       <h4 style={{ textAlign: "center" }}>من فضلك اكمل البيانات</h4>
@@ -51,10 +69,11 @@ const CompleteOrder = () => {
           <input
             type="text"
             value={phoneNumebr}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            // onChange={(e) => setPhoneNumber(e.target.value)}
             className="inputField"
             placeholder="رقم الهاتف"
             required
+            readOnly
           />
         </div>
 

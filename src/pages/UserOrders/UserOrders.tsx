@@ -42,7 +42,7 @@ const UserOrders = () => {
               </th>
               <th>{order.shippingAddress}</th>
               <th>{order.orderDate.slice(0, 10)}</th>
-              <th>{order.totalAmunt}</th>
+              <th>{order.totalAmount}</th>
               <th>{order.status}</th>
             </tr>
           ))}

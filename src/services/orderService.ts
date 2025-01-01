@@ -21,7 +21,7 @@ const OrderService = {
     phoneNumebr: string
   ) => {
     try {
-      await axiosInstance.post(`Orders`, {
+      return await axiosInstance.post(`Orders`, {
         userId,
         shoppingCartId,
         shippingAddress,
@@ -39,6 +39,14 @@ const OrderService = {
         });
       }
     }
+  },
+
+  getUserOrder: async (orderId: string) => {
+    const req = await axiosInstance
+      .get(`Orders/GetOrder/${orderId}`)
+      .then((res) => res.data)
+      .catch((err) => toast.error(err));
+    return req;
   },
 };
 

@@ -120,16 +120,9 @@ const Cart = () => {
                 cartProducts.items.map((item) => (
                   <tr key={item.id}>
                     <td>1</td>
-                    <td
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "20px",
-                        border: "none",
-                      }}
-                    >
+                    <td>
                       {item.title}
+                      <br />
                       <img src={item.image} alt="" width={50} height={50} />
                     </td>
                     <td>
