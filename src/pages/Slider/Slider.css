@@ -36,6 +36,7 @@
 }
 .swiper-pagination-bullet {
   padding: 8px;
+  background: #fad898;
 }
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: #7a550f;

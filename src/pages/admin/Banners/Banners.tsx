@@ -145,9 +145,9 @@ const AdminBanners = () => {
           </tr>
         </thead>
         <tbody>
-          {banners.map((banner) => (
+          {banners.map((banner, idx) => (
             <tr key={banner.id}>
-              <td>{banner.id}</td>
+              <td>{idx + 1}</td>
               <td>
                 <img src={banner.image} width={50} height={50} alt="" />
               </td>

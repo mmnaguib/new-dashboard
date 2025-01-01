@@ -2,7 +2,11 @@ import { Fragment, useEffect, useState } from "react";
 import OrderService from "../../services/orderService";
 import { IOrderProps } from "../../interface";
 import "./Payment.css";
+import { Navigate, useLocation } from "react-router-dom";
+
 const Payment = () => {
+  const location = useLocation();
+  const { fromSource } = location.state || {};
   const [order, setOrder] = useState<IOrderProps | null>(null);
 
   const getOrderDetails = async (orderId: string) => {
@@ -26,9 +30,13 @@ const Payment = () => {
   // };
 
   useEffect(() => {
-    const orderId = "c93e3d2c-cd13-487b-8d08-a401c04f6456"; // يمكن تمرير هذا عبر state من location
+    const orderId = "5d975731-e15b-422c-ad9e-413471738c3f	"; // يمكن تمرير هذا عبر state من location
     getOrderDetails(orderId);
   }, []);
+
+  if (!fromSource) {
+    return <Navigate to="/" />;
+  }
 
   // useEffect(() => {
   //   if (order && order.totalAmount) {
@@ -63,6 +71,7 @@ const Payment = () => {
             <span>المنتج</span>
             <span>الكمية</span>
             <span>السعر</span>
+            <span>الاجمالي</span>
           </div>
           <div className="grid-body">
             {order?.items.map((item, idx) => (
@@ -74,12 +83,13 @@ const Payment = () => {
                 </div>
                 <div>{item.quantity}</div>
                 <div>{item.unitPrice}</div>
-                <div className="total-price">
-                  السعر الاجمالي للفاتورة : <span>{item.totalPrice}</span> جنيه
-                  لا غير
-                </div>
+                <div>{item.totalPrice}</div>
               </Fragment>
             ))}
+            <div className="total-price">
+              السعر الاجمالي للفاتورة : <span>{order?.totalAmount}</span> جنيه
+              لا غير
+            </div>
           </div>
         </div>
 

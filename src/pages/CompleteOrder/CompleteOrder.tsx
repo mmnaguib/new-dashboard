@@ -32,7 +32,7 @@ const CompleteOrder = () => {
         shippingAddress,
         phoneNumebr
       );
-      navigate("/payment");
+      navigate("/payment", { state: { fromSource: true } });
     } catch (err: any) {
       toast(err.response?.data || "Something went wrong");
     } finally {

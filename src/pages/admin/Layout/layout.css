@@ -108,3 +108,15 @@
 .swiper {
   z-index: 0 !important;
 }
+
+.orderStatus {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.orderStatus li.active {
+  color: #f00;
+}
