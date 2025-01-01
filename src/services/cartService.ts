@@ -33,9 +33,11 @@ const CartService = {
     }
   },
 
-  deleteItemFromQuantity: async (id: number) => {
+  updateItemQuantity: async (id: number, quantity: number) => {
     try {
-      await axiosInstance.delete(`ShoppingCart/remove/${id}`);
+      await axiosInstance.put(
+        `ShoppingCart?cartItemId=${id}&quantity=${quantity}`
+      );
     } catch (err: any) {
       if (err.response && err.response.data) {
         const errors = err.response.data;
@@ -50,9 +52,9 @@ const CartService = {
     }
   },
 
-  updateItemQuantity: async (id: number, quantity: number) => {
+  deleteItemFromQuantity: async (id: number) => {
     try {
-      await axiosInstance.put(`ShoppingCart/update/${id}?quantity=${quantity}`);
+      await axiosInstance.delete(`ShoppingCart/remove/${id}`);
     } catch (err: any) {
       if (err.response && err.response.data) {
         const errors = err.response.data;

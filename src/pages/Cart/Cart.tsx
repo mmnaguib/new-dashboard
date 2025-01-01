@@ -163,6 +163,7 @@ const Cart = () => {
               إجمالي سعر الفاتورة : {cartProducts?.totalPrice} جنيه مصري لا غير
             </p>
             <Link
+              onClick={() => localStorage.setItem("cartCount", "0")}
               to="/order"
               state={
                 cartProducts?.cartId

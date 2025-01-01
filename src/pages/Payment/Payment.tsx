@@ -1,12 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import OrderService from "../../services/orderService";
 import { IOrderProps } from "../../interface";
-import { useLocation } from "react-router-dom";
-import PaymentService from "../../services/paymentService";
 import "./Payment.css";
 const Payment = () => {
   const [order, setOrder] = useState<IOrderProps | null>(null);
-  const location = useLocation();
 
   const getOrderDetails = async (orderId: string) => {
     try {
@@ -23,7 +20,6 @@ const Payment = () => {
   // ) => {
   //   try {
   //     const res = await PaymentService.InitiatePayment(totalPrice, currenct);
-  //     console.log(res);
   //   } catch (error) {
   //     console.error("Error initiating payment:", error);
   //   }

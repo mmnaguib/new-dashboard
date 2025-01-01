@@ -26,14 +26,13 @@ const CompleteOrder = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await OrderService.addNewOrder(
+      await OrderService.addNewOrder(
         userId,
         shoppingCartId,
         shippingAddress,
         phoneNumebr
       );
-      console.log(res?.data);
-      navigate("/payment", { state: res });
+      navigate("/payment");
     } catch (err: any) {
       toast(err.response?.data || "Something went wrong");
     } finally {
