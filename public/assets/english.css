@@ -1,0 +1,24 @@
+.userListContent {
+  right: 20px;
+  left: unset;
+  text-align: left;
+}
+
+.cartCount {
+  right: -22px;
+  left: unset;
+}
+
+.showCategory i.fa-arrow-left {
+  right: 10px;
+  left: unset;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.btnCartpurchase {
+  text-align: left;
+}
+
+.form-group label {
+  text-align: left;
+}

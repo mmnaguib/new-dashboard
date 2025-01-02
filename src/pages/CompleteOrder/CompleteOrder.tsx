@@ -3,6 +3,7 @@ import OrderService from "../../services/orderService";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import UserService from "../../services/userServices";
+import { useTranslation } from "react-i18next";
 
 const CompleteOrder = () => {
   const userId = JSON.parse(localStorage.getItem("user")!).userId;
@@ -22,17 +23,21 @@ const CompleteOrder = () => {
     }
   };
 
+  const { t }: { t: (key: string) => string } = useTranslation();
+
   const formHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await OrderService.addNewOrder(
+      const res = await OrderService.addNewOrder(
         userId,
         shoppingCartId,
         shippingAddress,
         phoneNumebr
       );
-      navigate("/payment", { state: { fromSource: true } });
+      if (res?.status === 200) {
+        navigate("/payment", { state: { fromSource: true } });
+      }
     } catch (err: any) {
       toast(err.response?.data || "Something went wrong");
     } finally {
@@ -53,24 +58,24 @@ const CompleteOrder = () => {
       <h4 style={{ textAlign: "center" }}>من فضلك اكمل البيانات</h4>
       <form onSubmit={formHandler}>
         <div className="form-group">
-          <label>العنوان</label>
+          <label>{t("address")}</label>
           <input
             type="text"
             value={shippingAddress}
             onChange={(e) => setAddress(e.target.value)}
             className="inputField"
-            placeholder="العنوان"
+            placeholder={t("address")}
             required
           />
         </div>
         <div className="form-group">
-          <label>الهاتف</label>
+          <label>{t("phone")}</label>
           <input
             type="text"
             value={phoneNumebr}
             // onChange={(e) => setPhoneNumber(e.target.value)}
             className="inputField"
-            placeholder="رقم الهاتف"
+            placeholder={t("phone")}
             required
             readOnly
           />
@@ -78,7 +83,7 @@ const CompleteOrder = () => {
 
         <div style={{ width: "200px", margin: "auto" }}>
           <button type="submit" className="btn submitBtn" disabled={loading}>
-            {loading ? <i className="fa-solid fa-spinner"></i> : "سجل الطلب"}
+            {loading ? <i className="fa-solid fa-spinner"></i> : t("toPay")}
           </button>
         </div>
       </form>

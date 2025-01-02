@@ -3,11 +3,15 @@ import { ICategoryProps } from "../../interface";
 import CategoryService from "../../services/categoryService";
 import "./categories.css";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 const Categories = ({
   setSelectedCategoryId,
 }: {
   setSelectedCategoryId: (id: number | null) => void;
 }) => {
+  const { t } = useTranslation();
+
   const [categories, setCategories] = useState<ICategoryProps[]>([]);
   const fetchCategories = async () => {
     const res = await CategoryService.getAllCategories();
@@ -20,7 +24,7 @@ const Categories = ({
     <div className="showCategories">
       <div className="showCategory" onClick={() => setSelectedCategoryId(null)}>
         <i className="fa-solid fa-home"></i>
-        <span>الكل</span>
+        <span>{t("all")}</span>
       </div>
       {categories.map((category) => (
         <div

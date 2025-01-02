@@ -11,7 +11,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  direction: rtl;
   z-index: 1;
 }
 .allNavbar {
@@ -20,7 +19,7 @@
 }
 
 .navbar .fa-user {
-  padding-left: 10px;
+  padding: 0 20px;
 }
 
 .navbar a {
@@ -119,4 +118,14 @@
 
 .orderStatus li.active {
   color: #f00;
+}
+
+.languageSwitcher {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  background: transparent;
 }

@@ -14,9 +14,6 @@ const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
   const [addedProducts, setAddedProducts] = useState<number[]>([]);
   const userTempId = isLoggedIn ? JSON.parse(userData).userId : null;
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
-  const [alert, setAlert] = useState<{ message: string; type: string } | null>(
-    null
-  );
   const { setCartCount } = useCart();
 
   // Add Products To Card

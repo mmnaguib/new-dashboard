@@ -1,0 +1,21 @@
+{
+    "welcome": "مرحبًا بك في موقعنا",
+    "cart": "عربة التسوق",
+    "all": "الكل",
+    "admin-dashboard":"لوحة الأدمن",
+    "login":"تسجيل الدخول",
+    "homePage":"الصفحة الرئيسية",
+    "my-orders": "طلباتي",
+    "logout": "تسجيل الخروج",
+    "product": "المنتج",
+    "quantity": "الكمية",
+    "price": "السعر",
+    "total": "إجمالي السعر",
+    "delete": "حذف",
+    "Totalbillprice":"إجمالي سعر الفاتورة",
+    "Egyptianpoundsonly":"جنيه مصري لا غير",
+    "continuethepurchaseprocess": "تابع عملية الشراء",
+    "address": "عنوان الشحن",
+    "phone":"رقم الهاتف",
+    "toPay": "إلي صفحة الدفع"
+  }

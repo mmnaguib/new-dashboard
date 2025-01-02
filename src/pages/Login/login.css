@@ -41,6 +41,10 @@
   gap: 10px;
 }
 
+.form-group label {
+  text-align: right;
+}
+
 .inputField {
   border: none;
   border-bottom: 1px solid #b97802;

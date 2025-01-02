@@ -1,0 +1,21 @@
+{
+    "welcome": "Welcome to our website",
+    "cart": "Cart",
+    "all":"All",
+    "admin-dashboard":"Admin Dashboard",
+    "login":"Login",
+    "homePage":"Home Page",
+    "my-orders": "My Orders",
+    "logout": "Logout",
+    "product": "Product",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "delete": "Delete",
+    "Totalbillprice":"Total Bill Price",
+    "Egyptianpoundsonly":"Egyptian Pounds Only",
+    "continuethepurchaseprocess":"Continue the Purchase Process",
+    "address":"Address",
+    "phone":"Phone",
+    "toPay": "To Payment Methods"
+  }

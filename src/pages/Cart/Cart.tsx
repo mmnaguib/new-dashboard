@@ -5,11 +5,13 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { useCart } from "../../utils/CartProvider";
 import Alert from "../../components/Alert/Alert";
+import { useTranslation } from "react-i18next";
 const Cart = () => {
   const userTempId = JSON.parse(localStorage.getItem("user")!).userId;
   const [cartProducts, setCartProducts] = useState<ICartProps | null>(null);
   const { setCartCount } = useCart();
   const [loading, setLoading] = useState(false);
+  const { t }: { t: (key: string) => string } = useTranslation();
 
   const getCart = async (userId: string) => {
     setLoading(true);
@@ -108,11 +110,11 @@ const Cart = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>المنتج</th>
-                <th>الكمية</th>
-                <th>السعر</th>
-                <th> الاجمالي $</th>
-                <th>حذف</th>
+                <th>{t("product")}</th>
+                <th>{t("quantity")}</th>
+                <th>{t("price")}</th>
+                <th>{t("total")}</th>
+                <th>{t("delete")}</th>
               </tr>
             </thead>
             <tbody>
@@ -158,9 +160,10 @@ const Cart = () => {
                 ))}
             </tbody>
           </table>
-          <div style={{ margin: "0 15px" }}>
+          <div className="btnCartpurchase" style={{ margin: "0 15px" }}>
             <p style={{ fontWeight: "bold", fontSize: "20px" }}>
-              إجمالي سعر الفاتورة : {cartProducts?.totalPrice} جنيه مصري لا غير
+              {t("Totalbillprice")} : {cartProducts?.totalPrice}{" "}
+              {t("Egyptianpoundsonly")}
             </p>
             <Link
               onClick={() => localStorage.setItem("cartCount", "0")}
@@ -171,11 +174,11 @@ const Cart = () => {
                   : {}
               }
               style={{
-                padding: "10px",
+                padding: "10px 30px",
                 border: "none",
                 background: "#000",
                 color: "#fff",
-                width: "200px",
+                width: "fit-content",
                 fontWeight: "bold",
                 borderRadius: "5px",
                 textDecoration: "none",
@@ -184,7 +187,7 @@ const Cart = () => {
               }}
               className="checkoutBtn"
             >
-              تابع عملية الشراء
+              {t("continuethepurchaseprocess")}
             </Link>
           </div>
         </>
