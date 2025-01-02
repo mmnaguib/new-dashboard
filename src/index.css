@@ -5,7 +5,7 @@
 }
 :root {
   --sidebarWidth: 200px;
-  --navbarWidth: 40px;
+  --navbarHeight: 70px;
 }
 body {
   margin: 0;
@@ -14,12 +14,8 @@ body {
   background-color: #f5f5f5;
 }
 .content {
-  margin-top: var(--navbarWidth);
   margin-right: var(--sidebarWidth);
   padding: 10px;
-}
-.allContent {
-  margin-top: var(--navbarWidth);
 }
 .loader-overlay {
   position: fixed;

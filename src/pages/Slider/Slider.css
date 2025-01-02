@@ -41,3 +41,58 @@
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: #7a550f;
 }
+
+.bannerContainer {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: linear-gradient(to right, #00c2e0, rgb(3, 105, 161));
+}
+
+.bannerContent {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.headerContent {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.headingContent {
+  margin-bottom: 1rem;
+  font-size: 4rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+.paragraphContent {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  line-height: 1.75rem;
+  color: rgb(255, 255, 255);
+}
+
+.SaleContent {
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: rgb(240, 51, 40);
+}
+
+.imageBanner {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 33.333333%;
+  object-fit: contain;
+}

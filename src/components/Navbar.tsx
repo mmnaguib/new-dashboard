@@ -46,6 +46,7 @@ const Navbar = () => {
   const toggleLanguage = () => {
     const newLanguage = currentLanguage === "ar" ? "en" : "ar";
     i18n.changeLanguage(newLanguage);
+    setUserList(false);
   };
 
   return (
@@ -56,43 +57,73 @@ const Navbar = () => {
           : "allNavbar navbar"
       }
     >
-      <div className="navLinks">
-        <NavLink to="/">{t("homePage")}</NavLink>
-        {!isLoggedIn && <NavLink to="/login">{t("login")}</NavLink>}
-        {isLoggedIn && user?.roles?.includes("Admin") && (
-          <NavLink to="/admin">{t("admin-dashboard")}</NavLink>
-        )}
-        {isLoggedIn && (
-          <NavLink to="/cart" style={{ position: "relative" }}>
-            <span className="cartCount">{cartCount}</span>
-            <i className="fa-solid fa-shopping-cart"></i>
-          </NavLink>
-        )}
-      </div>
-      <button onClick={toggleLanguage} className="languageSwitcher">
-        {currentLanguage === "ar" ? "English" : "العربية"}
-      </button>
-      {isLoggedIn && (
-        <>
+      <div className="rightNav">
+        <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search for products..."
+          />
+          <button className="search-button">
+            <i className="fa fa-search"></i>
+          </button>
+        </div>
+
+        <div style={{ position: "relative" }}>
           <i
             className="fa-solid fa-user fa-lg"
             onClick={() => setUserList((prev) => !prev)}
           ></i>
           {userList && (
             <div className="userListContent">
-              <span className="username">{user?.name}</span>
-              <br />
-              <Link to="my-orders" onClick={() => setUserList(false)}>
-                {t("my-orders")}
-              </Link>{" "}
-              <br />
-              <button className="logout" onClick={logoutHandler}>
-                {t("logout")}
+              {isLoggedIn && (
+                <>
+                  <span className="username">{user?.name}</span>
+                  <hr />
+                  <span>
+                    <Link to="my-orders" onClick={() => setUserList(false)}>
+                      {t("my-orders")}
+                    </Link>
+                  </span>
+                  <br />
+                  <button className="logout" onClick={logoutHandler}>
+                    {t("logout")}
+                    <i className="fa-solid fa-right-from-bracket"></i>{" "}
+                  </button>
+                  <br />
+                </>
+              )}
+              <button onClick={toggleLanguage} className="languageSwitcher">
+                {currentLanguage === "ar" ? "En" : "عربي"}
               </button>
             </div>
           )}
-        </>
-      )}
+        </div>
+
+        {isLoggedIn && (
+          <Link to="/cart" style={{ position: "relative" }}>
+            <span className="cartCount">{cartCount}</span>
+            <i className="fa-solid fa-shopping-cart"></i>
+          </Link>
+        )}
+      </div>
+
+      <div className="Links">
+        <NavLink to="/">{t("homePage")}</NavLink>
+        {!isLoggedIn && <NavLink to="/login">{t("login")}</NavLink>}
+        {isLoggedIn && user?.roles?.includes("Admin") && (
+          <NavLink to="/admin">{t("admin-dashboard")}</NavLink>
+        )}
+      </div>
+      <div style={{ width: "60px", height: "60px" }}>
+        <img
+          src="/assets/images/logo.webp"
+          width={"100%"}
+          height={"100%"}
+          style={{ borderRadius: "4px" }}
+          alt="logo"
+        />
+      </div>
     </div>
   );
 };

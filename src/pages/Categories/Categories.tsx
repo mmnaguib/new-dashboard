@@ -10,7 +10,7 @@ const Categories = ({
 }: {
   setSelectedCategoryId: (id: number | null) => void;
 }) => {
-  const { t } = useTranslation();
+  const { t }: { t: (key: string) => string } = useTranslation();
 
   const [categories, setCategories] = useState<ICategoryProps[]>([]);
   const fetchCategories = async () => {

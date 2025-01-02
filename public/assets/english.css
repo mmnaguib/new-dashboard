@@ -1,6 +1,7 @@
 .userListContent {
-  right: 20px;
-  left: unset;
+  width: 150px;
+}
+.userListContent {
   text-align: left;
 }
 

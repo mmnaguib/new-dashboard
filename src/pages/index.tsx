@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ImageSlider from "./Slider/Slider";
 import Categories from "./Categories/Categories";
 import HomeProducts from "./HomeProducts/HomeProducts";

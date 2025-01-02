@@ -18,35 +18,58 @@ const ImageSlider = () => {
     fetchBanners();
   }, [fetchBanners]);
 
-  return (
-    <div style={{ position: "relative", height: "51vh" }}>
-      <Swiper
-        spaceBetween={0}
-        slidesPerView={1}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
-        pagination={{
-          clickable: true, // النقاط قابلة للنقر
-        }}
-        modules={[Navigation, Pagination]}
-        style={{ width: "100%" }}
-      >
-        {banners.map((banner, index) => (
-          <SwiperSlide key={index}>
-            <img
-              src={banner.image}
-              alt={`Slide ${index}`}
-              className="sliderImage"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+  return banners.length > 0 ? (
+    <>
+      <div style={{ position: "relative", height: "51vh" }}>
+        <Swiper
+          spaceBetween={0}
+          slidesPerView={1}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
+          pagination={{
+            clickable: true, // النقاط قابلة للنقر
+          }}
+          modules={[Navigation, Pagination]}
+          style={{ width: "100%" }}
+        >
+          {banners.map((banner, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={banner.image}
+                alt={`Slide ${index}`}
+                className="sliderImage"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-      <button className="swiper-button-prev"></button>
-      <button className="swiper-button-next"></button>
-    </div>
+        <button className="swiper-button-prev"></button>
+        <button className="swiper-button-next"></button>
+      </div>
+    </>
+  ) : (
+    <>
+      <div className="bannerContainer">
+        <div className="bannerContent">
+          <div className="headerContent ">
+            <h1 className="headingContent ">Summer Sale</h1>
+            <p className="paragraphContent ">
+              Enjoy discounts on selected items
+            </p>
+            <p className="SaleContent ">GET 50% OFFER</p>
+          </div>
+          <div className="imageBanner">
+            <img
+              src={"/assets/images/bannerImage.png"}
+              alt="banner"
+              className="bannerImage"
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
