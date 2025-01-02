@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./login.css";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import axiosInstance from "../../utils/AxiosInstance";
 const Login = () => {
@@ -82,6 +82,7 @@ const Login = () => {
             {loading ? <i className="fa-solid fa-spinner"></i> : "تسجيل الدخول"}
           </button>
         </form>
+        <Link to="/register">ليس لديك حساب ؟</Link>
       </div>
     </div>
   );

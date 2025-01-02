@@ -127,13 +127,9 @@ const AdminOrders = () => {
                 <th>العنوان</th>
                 <th>التاريخ</th>
                 <th>السعر</th>
-                {selectedVal !== "Cancelled" && selectedVal !== "Received" && (
-                  <th>الحالة</th>
-                )}
+                {selectedVal !== "Pending" && <th>الحالة</th>}
                 <th>المستخدم</th>
-                {selectedVal !== "Cancelled" && selectedVal !== "Received" && (
-                  <th>cancel</th>
-                )}
+                {selectedVal !== "Pending" && <th>cancel</th>}
               </tr>
             </thead>
             <tbody>
@@ -153,27 +149,25 @@ const AdminOrders = () => {
                     <th>{order.shippingAddress}</th>
                     <th>{order.orderDate.slice(0, 10)}</th>
                     <th>{order.totalAmount}</th>
-                    {selectedVal !== "Cancelled" &&
-                      selectedVal !== "Received" && (
-                        <th>
-                          <button onClick={() => updateStatus(order.orderId)}>
-                            {order.status}
-                          </button>
-                        </th>
-                      )}
+                    {selectedVal !== "Pending" && (
+                      <th>
+                        <button onClick={() => updateStatus(order.orderId)}>
+                          {order.status}
+                        </button>
+                      </th>
+                    )}
                     <th>{order.userName}</th>
-                    {selectedVal !== "Cancelled" &&
-                      selectedVal !== "Received" && (
-                        <th>
-                          <button
-                            className="delete actionsBtn"
-                            onClick={() => deleteHandler(order.orderId)}
-                            style={{ width: "fit-content" }}
-                          >
-                            Cancel
-                          </button>
-                        </th>
-                      )}
+                    {selectedVal !== "Pending" && (
+                      <th>
+                        <button
+                          className="delete actionsBtn"
+                          onClick={() => deleteHandler(order.orderId)}
+                          style={{ width: "fit-content" }}
+                        >
+                          Cancel
+                        </button>
+                      </th>
+                    )}
                   </tr>
                 ))}
             </tbody>

@@ -12,7 +12,7 @@ import AdminHome from "../pages/admin/Home/Home";
 import Login from "../pages/Login/Login";
 import PageNotFound from "../pages/PageNotFound";
 import AdminCategories from "../pages/admin/Categories/Categories";
-import RegisterNewAdmin from "../pages/admin/Register/RegisterNewAdmin";
+import RegisterNewAdmin from "../pages/admin/RegisterNewAdmin/RegisterNewAdmin";
 import AdminProducts from "../pages/admin/Products/Products";
 import AdminBanners from "../pages/admin/Banners/Banners";
 import Category from "../pages/Categories/Category";
@@ -21,6 +21,7 @@ import AdminOrders from "../pages/admin/Orders/Orders";
 import UserOrders from "../pages/UserOrders/UserOrders";
 import CompleteOrder from "../pages/CompleteOrder/CompleteOrder";
 import Payment from "../pages/Payment/Payment";
+import UserRegister from "../pages/UserRegister/UserRegister";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
 const router = createBrowserRouter(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Root />} errorElement={<ErrorHandler />}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<UserRegister />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<CompleteOrder />} />
         <Route path="/my-orders" element={<UserOrders />} />
