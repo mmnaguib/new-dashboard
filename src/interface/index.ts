@@ -70,6 +70,7 @@ export interface IOrderProps {
   contactNumber: string;
   userName: string;
   items: IOrderItem[];
+  orderNumber: string;
 }
 
 export interface IOrderItem {

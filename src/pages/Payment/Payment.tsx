@@ -6,9 +6,8 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const Payment = () => {
   const location = useLocation();
-  const { fromSource } = location.state || {};
+  const { fromSource, orderId } = location.state || {};
   const [order, setOrder] = useState<IOrderProps | null>(null);
-
   const getOrderDetails = async (orderId: string) => {
     try {
       const orderDetail = await OrderService.getUserOrder(orderId);
@@ -30,9 +29,8 @@ const Payment = () => {
   // };
 
   useEffect(() => {
-    const orderId = "5d975731-e15b-422c-ad9e-413471738c3f	"; // يمكن تمرير هذا عبر state من location
     getOrderDetails(orderId);
-  }, []);
+  }, [orderId]);
 
   if (!fromSource) {
     return <Navigate to="/" />;
@@ -48,7 +46,7 @@ const Payment = () => {
   return (
     <>
       <div className="invoiceReport">
-        <h1>Rohiem Store</h1>
+        <h1>Tia Store</h1>
         <span className="aboveTable">اسم العميل : {order?.userName}</span>
         <br />
         <span className="aboveTable">

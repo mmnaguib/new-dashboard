@@ -37,11 +37,11 @@ const AddProduct = ({
       categoryId
     );
     if (res?.status === 200) {
-      setProducts((prevCategories: IProductProps[]) => [
-        ...prevCategories,
+      toast.success("تمت اضافة القسم بنجاح");
+      setProducts((prevProducts: IProductProps[]) => [
+        ...prevProducts,
         res.data,
       ]);
-      toast.success("تمت اضافة القسم بنجاح");
       setLoading(false);
       setOpenNew(false);
       setTitle("");
@@ -50,6 +50,7 @@ const AddProduct = ({
       setQuantity(0);
       setImage(null);
     }
+    setLoading(false);
   };
 
   const getAllCatgories = async () => {

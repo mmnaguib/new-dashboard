@@ -12,10 +12,12 @@
     "price": "السعر",
     "total": "إجمالي السعر",
     "delete": "حذف",
-    "Totalbillprice":"إجمالي سعر الفاتورة",
-    "Egyptianpoundsonly":"جنيه مصري لا غير",
+    "Totalbillprice":"الإجمالي ",
+    "Egyptianpoundsonly":"جنيه مصري",
     "continuethepurchaseprocess": "تابع عملية الشراء",
     "address": "عنوان الشحن",
     "phone":"رقم الهاتف",
-    "toPay": "إلي صفحة الدفع"
+    "toPay": "إلي صفحة الدفع",
+    "shoppingcart":  "سلة التسوق",
+    "ezalah": "إزالة"
   }

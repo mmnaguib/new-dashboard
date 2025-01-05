@@ -36,7 +36,10 @@ const CompleteOrder = () => {
         phoneNumebr
       );
       if (res?.status === 200) {
-        navigate("/payment", { state: { fromSource: true } });
+        navigate("/payment", {
+          state: { fromSource: true, orderId: res.data.id },
+        });
+        console.log(res.data);
       }
     } catch (err: any) {
       toast(err.response?.data || "Something went wrong");

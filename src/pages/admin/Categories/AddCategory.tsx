@@ -27,12 +27,10 @@ const AddCategory = ({
     const res = await CategoryService.addNewCategory(name, description, image);
     if (res?.status === 200) {
       toast.success("تمت اضافة القسم بنجاح");
-
       setCategories((prevCategories: ICategoryProps[]) => [
         ...prevCategories,
         res.data,
       ]);
-
       setLoading(false);
       setOpenNew(false);
       setCatName("");

@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../utils/CartProvider";
 import Alert from "../../components/Alert/Alert";
 import { useTranslation } from "react-i18next";
+import "./cart.css";
 const Cart = () => {
   const userTempId = JSON.parse(localStorage.getItem("user")!).userId;
   const [cartProducts, setCartProducts] = useState<ICartProps | null>(null);
-  const { setCartCount } = useCart();
+  const { cartCount, setCartCount } = useCart();
   const [loading, setLoading] = useState(false);
   const { t }: { t: (key: string) => string } = useTranslation();
 
@@ -105,66 +106,92 @@ const Cart = () => {
         </div>
       )}
       {cartProducts?.items.length ? (
-        <>
-          <table border={1} className="tableShow">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>{t("product")}</th>
-                <th>{t("quantity")}</th>
-                <th>{t("price")}</th>
-                <th>{t("total")}</th>
-                <th>{t("delete")}</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div className="cartContainer">
+          <div className="cartItems">
+            <div className="cartHeader">
+              <h1>
+                {t("shoppingcart")} ( {cartCount} )
+              </h1>
+            </div>
+            <hr />
+            <div className="cartContent">
               {cartProducts &&
                 cartProducts.items.map((item) => (
-                  <tr key={item.id}>
-                    <td>1</td>
-                    <td>
-                      {item.title}
-                      <br />
-                      <img src={item.image} alt="" width={50} height={50} />
-                    </td>
-                    <td>
-                      <button
-                        style={{ background: "#080" }}
-                        className="actionsBtn"
-                        onClick={() => increaseQuantity(item.id, item.quantity)}
+                  <div className="cartItem">
+                    <div className="flexDiv">
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "30px",
+                        }}
                       >
-                        <i className="fa-solid fa-plus"></i>
-                      </button>
-                      <b style={{ margin: "0 15px", fontSize: "20px" }}>
-                        {item.quantity}
-                      </b>
-                      <button
-                        style={{ background: "#2d5085" }}
-                        className="actionsBtn"
-                        onClick={() => decreaseQuantity(item.id, item.quantity)}
-                      >
-                        <i className="fa-solid fa-minus"></i>
-                      </button>
-                    </td>
-                    <td>{item.price}</td>
-                    <td>{item.price * item.quantity} $</td>
-                    <td>
+                        <img src={item.image} alt="" width={72} height={72} />
+                        <h3>{item.title}</h3>
+                      </div>
+                      <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+                        {item.price} جنيه
+                      </div>
+                    </div>
+                    <div className="flexDiv">
                       <button
                         className="delete actionsBtn"
                         onClick={() => deleteHandler(item.id)}
                       >
                         <i className="fa-solid fa-trash"></i>
                       </button>
-                    </td>
-                  </tr>
+                      <div>
+                        <button
+                          style={{ background: "#0369a1" }}
+                          className="actionsBtn"
+                          onClick={() =>
+                            increaseQuantity(item.id, item.quantity)
+                          }
+                        >
+                          <i className="fa-solid fa-plus"></i>
+                        </button>
+                        <b style={{ margin: "0 15px", fontSize: "20px" }}>
+                          {item.quantity}
+                        </b>
+                        <button
+                          style={{ background: "#0369a1" }}
+                          className="actionsBtn"
+                          onClick={() =>
+                            decreaseQuantity(item.id, item.quantity)
+                          }
+                        >
+                          <i className="fa-solid fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
                 ))}
-            </tbody>
-          </table>
-          <div className="btnCartpurchase" style={{ margin: "0 15px" }}>
-            <p style={{ fontWeight: "bold", fontSize: "20px" }}>
-              {t("Totalbillprice")} : {cartProducts?.totalPrice}{" "}
-              {t("Egyptianpoundsonly")}
+            </div>
+          </div>
+          <div
+            className="btnCartpurchase"
+            style={{ padding: "10px", maxHeight: "200px" }}
+          >
+            <p style={{ margin: "10px 5px", fontSize: "20px" }}>
+              ملخص سلة التسوق
             </p>
+            <hr />
+            <div
+              style={{
+                padding: "10px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                fontSize: "1.5rem",
+              }}
+            >
+              <span>{t("Totalbillprice")}</span>
+              <span>
+                {cartProducts?.totalPrice} {t("Egyptianpoundsonly")}
+              </span>
+            </div>
+            <hr />
             <Link
               onClick={() => localStorage.setItem("cartCount", "0")}
               to="/order"
@@ -176,30 +203,31 @@ const Cart = () => {
               style={{
                 padding: "10px 30px",
                 border: "none",
-                background: "#000",
+                background: "#f68b1e",
                 color: "#fff",
-                width: "fit-content",
+                width: "100%",
                 fontWeight: "bold",
                 borderRadius: "5px",
                 textDecoration: "none",
                 display: "inline-block",
                 textAlign: "center",
+                marginTop: "20px",
               }}
               className="checkoutBtn"
             >
               {t("continuethepurchaseprocess")}
             </Link>
           </div>
-        </>
+        </div>
       ) : (
-        <div>
+        <>
           <Alert type="info">
             <span>لا يوجد منتجات في السلة</span>
             <Link to="/" className="continueShopping">
               اكمل تسوق <i className="fa-solid fa-arrow-left"></i>
             </Link>
           </Alert>
-        </div>
+        </>
       )}
     </>
   );

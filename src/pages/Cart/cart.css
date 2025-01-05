@@ -1,0 +1,34 @@
+.cartContainer{
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+    margin-top: 20px;
+}
+
+.cartContainer hr{
+    margin: 0;
+    background-color: #d4d4d6;
+}
+
+.cartContainer > div {
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.05);
+
+}
+.cartItems{
+    width: 80%;
+}
+.btnCartpurchase{width: 20%;}
+
+.flexDiv{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.flexDiv:last-of-type{
+    margin-bottom: 20px;
+}

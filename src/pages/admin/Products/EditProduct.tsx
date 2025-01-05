@@ -71,6 +71,8 @@ const EditProduct = ({
         setEditDescription("");
         setEditImage(null);
       }
+
+      setLoading(false);
     } else {
       toast.error("No exist id");
     }
