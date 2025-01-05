@@ -23,7 +23,7 @@ const AdminProducts = () => {
   const getAll = async () => {
     setLoading(true);
     const res = await ProductService.getAllProducts(1, 10);
-    setProducts(res);
+    setProducts(res.items);
     setLoading(false);
   };
 

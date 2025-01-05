@@ -5,7 +5,7 @@ const token = localStorage.getItem("authToken");
 const user = localStorage.getItem("user");
 
 const ProductService = {
-  getAllProducts: async (pageNumber: number, pageSize: number) => {
+  getAllProducts: async (pageNumber?: number, pageSize?: number) => {
     const req = axiosInstance
       .get(`Product?pageNumber=${pageNumber}&pageSize=${pageSize}`)
       .then((res) => res.data)
@@ -119,8 +119,8 @@ const ProductService = {
 
   getAllProductsAccourdingToCategory: async (
     id: number,
-    pageNumber: number,
-    pageSize: number
+    pageNumber?: number,
+    pageSize?: number
   ) => {
     const req = axiosInstance
       .get(
