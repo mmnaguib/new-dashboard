@@ -22,6 +22,7 @@ import UserOrders from "../pages/UserOrders/UserOrders";
 import CompleteOrder from "../pages/CompleteOrder/CompleteOrder";
 import Payment from "../pages/Payment/Payment";
 import UserRegister from "../pages/UserRegister/UserRegister";
+import Product from "../pages/Products/Product";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
 const router = createBrowserRouter(
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
         <Route path="/my-orders" element={<UserOrders />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/category/:id" element={<Category />} />
+        <Route path="/product/:id" element={<Product />} />
       </Route>
 
       <Route

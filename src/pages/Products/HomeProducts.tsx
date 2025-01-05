@@ -83,18 +83,6 @@ const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
     }
   }, [userTempId]);
 
-  const handlePreviousPage = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (page < total) {
-      setPage(page + 1);
-    }
-  };
-
   return (
     <div className="homeCardProducts">
       {isPageLoading ? (
