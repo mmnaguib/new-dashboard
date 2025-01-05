@@ -110,6 +110,7 @@ const Navbar = () => {
 
       <div className="Links">
         <NavLink to="/">{t("homePage")}</NavLink>
+        <NavLink to="/products">{t("products")}</NavLink>
         {!isLoggedIn && <NavLink to="/login">{t("login")}</NavLink>}
         {isLoggedIn && user?.roles?.includes("Admin") && (
           <NavLink to="/admin">{t("admin-dashboard")}</NavLink>

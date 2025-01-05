@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { IBannerProps } from "../../interface";
 import BannerService from "../../services/bannerService";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -20,7 +20,7 @@ const ImageSlider = () => {
 
   return banners.length > 0 ? (
     <>
-      <div style={{ position: "relative", height: "51vh" }}>
+      <div style={{ position: "relative" }}>
         <Swiper
           spaceBetween={0}
           slidesPerView={1}
@@ -31,7 +31,11 @@ const ImageSlider = () => {
           pagination={{
             clickable: true, // النقاط قابلة للنقر
           }}
-          modules={[Navigation, Pagination]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          modules={[Navigation, Pagination, Autoplay]}
           style={{ width: "100%" }}
         >
           {banners.map((banner, index) => (

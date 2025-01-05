@@ -5,10 +5,10 @@ const token = localStorage.getItem("authToken");
 const user = localStorage.getItem("user");
 
 const ProductService = {
-  getAllProducts: async () => {
+  getAllProducts: async (pageNumber?: number, pageSize?: number) => {
     const req = axiosInstance
-      .get("Product")
-      .then((res) => res.data.items)
+      .get(`Product?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+      .then((res) => res.data)
       .catch((err) => {
         toast(err.response?.data);
       });
@@ -117,9 +117,15 @@ const ProductService = {
     }
   },
 
-  getAllProductsAccourdingToCategory: async (id: number) => {
+  getAllProductsAccourdingToCategory: async (
+    id: number,
+    pageNumber?: number,
+    pageSize?: number
+  ) => {
     const req = axiosInstance
-      .get(`Product?categoryID=${id}`)
+      .get(
+        `Product?CategoryId=${id}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      )
       .then((res) => res.data.items)
       .catch((err) => {
         return toast.error(err.response?.data);

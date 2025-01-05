@@ -14,7 +14,7 @@ const AdminHome = () => {
     const categories = await CategoryService.getAllCategories();
     setCategoryNumber(categories.length);
     const products = await ProductService.getAllProducts();
-    setProductNumber(products.length);
+    setProductNumber(products.items.length);
     const banners = await BannerService.getAllBanners();
     setBannerNumber(banners.length);
     const orders = await OrderService.getAllOrders("Pending");
