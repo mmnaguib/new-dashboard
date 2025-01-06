@@ -67,3 +67,100 @@
   font-weight: bold;
   font-size: 16px;
 }
+
+.productsContent {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+}
+
+.showAllProducts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  justify-content: center;
+  text-align: center;
+  align-items: self-start;
+  flex-grow: 1;
+  margin-right: 260px;
+  height: calc(100vh - var(--navbarHeight));
+}
+
+.showAllProducts .productCard {
+  padding: 10px;
+  border-radius: 4px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 0 5px 5px #d1d1d1;
+}
+
+.showAllProducts .productData {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.productCardTitle {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.productsSidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  box-shadow: 0 0 5px 5px #eaeaea;
+  margin-left: 250px;
+  padding: 20px 10px 0 10px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 10px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: transparent;
+  color: #333;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.search-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button i {
+  font-size: 18px;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.search-button:hover i {
+  color: #007bff;
+}

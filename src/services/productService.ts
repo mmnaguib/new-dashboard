@@ -126,7 +126,7 @@ const ProductService = {
       .get(
         `Product?CategoryId=${id}&pageNumber=${pageNumber}&pageSize=${pageSize}`
       )
-      .then((res) => res.data.items)
+      .then((res) => res.data)
       .catch((err) => {
         return toast.error(err.response?.data);
       });

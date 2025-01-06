@@ -125,11 +125,12 @@ const AddProduct = ({
               <div className="form-group">
                 <label>الكمية</label>
                 <select
+                  value={categoryId || ""}
                   onChange={(e) => setCategoryId(+e.target.value)}
                   className="inputField"
                   required
                 >
-                  <option disabled value="">
+                  <option value="" disabled>
                     اختر
                   </option>
                   {categories.map((category) => (

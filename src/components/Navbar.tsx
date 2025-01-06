@@ -58,17 +58,6 @@ const Navbar = () => {
       }
     >
       <div className="rightNav">
-        <div className="search-bar">
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search for products..."
-          />
-          <button className="search-button">
-            <i className="fa fa-search"></i>
-          </button>
-        </div>
-
         <div style={{ position: "relative" }}>
           <i
             className="fa-solid fa-user fa-lg"

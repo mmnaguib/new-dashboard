@@ -45,8 +45,8 @@ const Category = () => {
               <img
                 src={`http://safia.runasp.net/` + product.image}
                 alt=""
-                width={50}
-                height={50}
+                width={60}
+                height={60}
               />
               <br />
               <b>{product.title}</b>

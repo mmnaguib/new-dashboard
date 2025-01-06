@@ -127,9 +127,9 @@ const AdminOrders = () => {
                 <th>العنوان</th>
                 <th>التاريخ</th>
                 <th>السعر</th>
-                {selectedVal !== "Pending" && <th>الحالة</th>}
+                {selectedVal === "Pending" && <th>الحالة</th>}
                 <th>المستخدم</th>
-                {selectedVal !== "Pending" && <th>cancel</th>}
+                {selectedVal === "Pending" && <th>cancel</th>}
               </tr>
             </thead>
             <tbody>

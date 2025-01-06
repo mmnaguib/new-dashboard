@@ -53,7 +53,7 @@
   position: absolute;
   top: 100%;
   background: #f5f5f5;
-  left: 50%;
+  right: 0;
   padding: 10px;
   border-radius: 4px;
   color: #000;
@@ -61,7 +61,6 @@
   font-weight: bold;
   box-shadow: none;
   line-height: 0;
-  transform: translateX(-50%);
   z-index: 1;
   box-shadow: 0 0 2px 2px #eaeaea;
 }
@@ -183,51 +182,4 @@
 
 .rightNav i {
   font-size: 25px;
-}
-.search-bar {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  padding: 5px 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-size: 16px;
-  background-color: transparent;
-  color: #333;
-}
-
-.search-input::placeholder {
-  color: #aaa;
-}
-
-.search-button {
-  border: none;
-  background: none;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.search-button i {
-  font-size: 18px;
-  color: #555;
-  transition: color 0.3s ease;
-}
-
-.search-button:hover i {
-  color: #007bff;
 }
