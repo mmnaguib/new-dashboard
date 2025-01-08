@@ -74,7 +74,15 @@ const Navbar = () => {
                       {t("my-orders")}
                     </Link>
                   </span>
-                  <br />
+                  <hr />
+                  <span>
+                    <Link
+                      to="favorite-products"
+                      onClick={() => setUserList(false)}
+                    >
+                      {t("my-orders")}
+                    </Link>
+                  </span>
                   <button className="logout" onClick={logoutHandler}>
                     {t("logout")}
                     <i className="fa-solid fa-right-from-bracket"></i>{" "}

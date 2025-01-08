@@ -26,6 +26,7 @@ import Product from "../pages/Products/Product";
 import Products from "../pages/Products/Products";
 import Bloggers from "../pages/admin/Blogger/Bloggers";
 import Coupons from "../pages/admin/Coupons/Coupons";
+import FavoriteProducts from "../pages/UserOrders/FavoriteProducts";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
 const router = createBrowserRouter(
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         <Route path="/payment" element={<Payment />} />
         <Route path="/category/:id" element={<Category />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/favorite-products" element={<FavoriteProducts />} />
       </Route>
 
       <Route

@@ -6,6 +6,7 @@ import CartService from "../../services/cartService";
 import { useCart } from "../../utils/CartProvider";
 import { Link } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
+import FavoriteButton from "../../components/FavButton";
 const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
   // state
   const [products, setProducts] = useState<IProductProps[]>([]);
@@ -112,6 +113,7 @@ const HomeProducts = ({ categoryId }: { categoryId: number | null }) => {
               </div>
               {product.category}
               <span className="productPrice">${product.price}</span>
+              <FavoriteButton productId={product.id} />
               {isLoggedIn && (
                 <>
                   {addedProducts.includes(product.id) ? (
