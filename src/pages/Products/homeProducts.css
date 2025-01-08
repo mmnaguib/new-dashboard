@@ -14,6 +14,7 @@
   border-radius: 5px;
   position: relative;
   width: 19%;
+  background-color: #fff;
 }
 
 .productCard .cartTitle {
@@ -83,7 +84,7 @@
   align-items: self-start;
   flex-grow: 1;
   margin-right: 260px;
-  height: calc(100vh - var(--navbarHeight));
+  margin-top: 15px;
 }
 
 .showAllProducts .productCard {
@@ -93,7 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  box-shadow: 0 0 5px 5px #d1d1d1;
+  box-shadow: 0 0 5px 5px #f1f1f1;
 }
 
 .showAllProducts .productData {
@@ -113,7 +114,6 @@
   position: fixed;
   right: 0;
   box-shadow: 0 0 5px 5px #eaeaea;
-  margin-left: 250px;
   padding: 20px 10px 0 10px;
 }
 

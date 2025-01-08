@@ -31,7 +31,7 @@ const UserOrders = () => {
           {orders.map((order, idx) => (
             <tr key={order.orderId}>
               <th>{idx + 1}</th>
-              <th>{order.orderId}</th>
+              <th>{order.number}</th>
               <th>
                 {order.items.map((item) => (
                   <Fragment key={item.productId}>

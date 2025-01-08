@@ -123,7 +123,7 @@ const AddProduct = ({
                 />
               </div>
               <div className="form-group">
-                <label>الكمية</label>
+                <label>القسم</label>
                 <select
                   value={categoryId || ""}
                   onChange={(e) => setCategoryId(+e.target.value)}

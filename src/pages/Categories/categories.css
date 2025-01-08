@@ -2,13 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: #f1f1f1;
   padding: 10px;
 }
 
 .showCategories .showCategory {
   padding: 5px 15px;
-  border: 1px solid #fff;
+  border: 1px solid #f1f1f1;
   background-color: #fff;
   margin: 0 5px;
   color: #000;

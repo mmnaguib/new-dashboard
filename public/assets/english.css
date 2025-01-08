@@ -3,6 +3,8 @@
 }
 .userListContent {
   text-align: left;
+  left: 0;
+  right: unset;
 }
 
 .cartCount {
@@ -22,4 +24,15 @@
 
 .form-group label {
   text-align: left;
+}
+
+.productsSidebar {
+  left: 0;
+  right: unset;
+  text-align: left;
+}
+
+.showAllProducts {
+  margin-right: 0;
+  margin-left: 250px;
 }

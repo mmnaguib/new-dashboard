@@ -137,7 +137,7 @@ const AdminOrders = () => {
                 orders.map((order, idx) => (
                   <tr key={order.orderId}>
                     <th>{idx + 1}</th>
-                    <th>{order.orderId}</th>
+                    <th>{order.number}</th>
                     <th>
                       {order.items.map((item) => (
                         <Fragment key={item.productId}>
@@ -149,7 +149,7 @@ const AdminOrders = () => {
                     <th>{order.shippingAddress}</th>
                     <th>{order.orderDate.slice(0, 10)}</th>
                     <th>{order.totalAmount}</th>
-                    {selectedVal !== "Pending" && (
+                    {selectedVal === "Pending" && (
                       <th>
                         <button onClick={() => updateStatus(order.orderId)}>
                           {order.status}
@@ -157,7 +157,7 @@ const AdminOrders = () => {
                       </th>
                     )}
                     <th>{order.userName}</th>
-                    {selectedVal !== "Pending" && (
+                    {selectedVal === "Pending" && (
                       <th>
                         <button
                           className="delete actionsBtn"

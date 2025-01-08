@@ -24,6 +24,8 @@ import Payment from "../pages/Payment/Payment";
 import UserRegister from "../pages/UserRegister/UserRegister";
 import Product from "../pages/Products/Product";
 import Products from "../pages/Products/Products";
+import Bloggers from "../pages/admin/Blogger/Bloggers";
+import Coupons from "../pages/admin/Coupons/Coupons";
 
 const isLoggedIn = !!localStorage.getItem("authToken");
 const router = createBrowserRouter(
@@ -52,6 +54,8 @@ const router = createBrowserRouter(
         <Route path="banners" element={<AdminBanners />} />
         <Route path="orders" element={<AdminOrders />} />
         <Route path="admin-register" element={<RegisterNewAdmin />} />
+        <Route path="bloggers" element={<Bloggers />} />
+        <Route path="coupons" element={<Coupons />} />
       </Route>
 
       <Route path="*" element={<PageNotFound />} />

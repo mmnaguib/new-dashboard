@@ -70,7 +70,9 @@ export interface IOrderProps {
   contactNumber: string;
   userName: string;
   items: IOrderItem[];
-  orderNumber: string;
+  number: string;
+  detailedAddress: string;
+  notes: string;
 }
 
 export interface IOrderItem {
@@ -102,4 +104,23 @@ export interface IEditProductPopupProps {
   editCategory: string;
   setEditCategory: (val: string) => void;
   setProducts: React.Dispatch<React.SetStateAction<IProductProps[]>>;
+}
+
+export interface ICoupon {
+  name: string;
+  code: string;
+  discountType: number;
+  discountValue: number;
+  maxUsageCount: number;
+  maxDiscountValue: number;
+  startDate: Date;
+  endDate: Date;
+  bloggerId: number;
+}
+
+export interface IBlogger {
+  id: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
 }

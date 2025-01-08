@@ -5,6 +5,7 @@ import Alert from "../../components/Alert/Alert";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/MonryFormat";
 import CategoryService from "../../services/categoryService";
+import { useTranslation } from "react-i18next";
 
 const Products = () => {
   const [products, setProducts] = useState<IProductProps[]>([]);
@@ -12,7 +13,7 @@ const Products = () => {
   const [categories, setCategories] = useState<ICategoryProps[]>([]);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [search, setSearch] = useState<string>("");
-  const [loading, setLoading] = useState(false); // Added loading for pages
+  const [loading, setLoading] = useState(false);
 
   const getAllProducts = async () => {
     setLoading(true);
@@ -22,10 +23,12 @@ const Products = () => {
     setLoading(false);
   };
 
+  const { t }: { t: (key: string) => string } = useTranslation();
+
   const getAllProductsByCategory = async (id: number) => {
     const res = await ProductService.getAllProductsAccourdingToCategory(id);
     setProducts(res.items);
-    setOriginalProducts(res.items); // تحديث المنتجات الأصلية عند تغيير القسم
+    setOriginalProducts(res.items);
   };
 
   const getAllCategories = async () => {
@@ -81,6 +84,14 @@ const Products = () => {
         </div>
         <div className="categoryInputs">
           <h5 style={{ margin: "0" }}>الاقسام</h5>
+          <input
+            type="radio"
+            name="category"
+            value="0"
+            onChange={() => getAllProducts()}
+          />{" "}
+          {t("all")}
+          <br />
           {categories.map((category) => (
             <Fragment key={category.id}>
               <input
