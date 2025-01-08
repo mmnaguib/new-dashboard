@@ -132,6 +132,16 @@ const ProductService = {
       });
     return req;
   },
+
+  getProduct: async (id: number) => {
+    const req = axiosInstance
+      .get(`Product/${id}`)
+      .then((res) => res.data)
+      .catch((err) => {
+        toast(err.response?.data);
+      });
+    return req;
+  },
 };
 
 export default ProductService;

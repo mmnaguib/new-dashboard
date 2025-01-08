@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useCallback } from "react";
 import { IProductProps } from "../../interface";
 import axiosInstance from "../../utils/AxiosInstance";
 
@@ -12,7 +11,7 @@ const FavoriteProducts: React.FC = () => {
     return favorites.map((id: string) => parseInt(id, 10));
   };
 
-  const fetchFavoriteProducts = async () => {
+  const fetchFavoriteProducts = useCallback(async () => {
     try {
       const favoriteIds = getFavoriteIds();
       if (favoriteIds.length === 0) {
@@ -33,11 +32,11 @@ const FavoriteProducts: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchFavoriteProducts();
-  }, []);
+  }, [fetchFavoriteProducts]);
 
   return (
     <div>

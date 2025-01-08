@@ -3,7 +3,7 @@ import ProductService from "../../services/productService";
 import { ICategoryProps, IProductProps } from "../../interface";
 import Alert from "../../components/Alert/Alert";
 import { Link } from "react-router-dom";
-import { formatPrice } from "../../utils/MonryFormat";
+import { formatPrice } from "../../utils/MoneyFormat";
 import CategoryService from "../../services/categoryService";
 import { useTranslation } from "react-i18next";
 
