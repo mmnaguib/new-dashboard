@@ -65,7 +65,7 @@ const AddCoupon = ({
         setDiscountValue(0);
         toast.success("تم إضافة الكوبون بنجاح ");
         setCoupons((prevCoupons: ICoupon[]) => [...prevCoupons, res.data]);
-        navigate("/coupons");
+        navigate("admin/coupons");
       }
     } catch (err: any) {
       if (err.response && err.response.data) {

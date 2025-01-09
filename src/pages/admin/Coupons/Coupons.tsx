@@ -12,7 +12,6 @@ const Coupons = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     setCoupons(res.data);
   }, [token]);
 
