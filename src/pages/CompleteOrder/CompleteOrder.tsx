@@ -9,6 +9,8 @@ const CompleteOrder = () => {
   const userId = JSON.parse(localStorage.getItem("user")!).userId;
   const [shippingAddress, setAddress] = useState<string>("");
   const [phoneNumebr, setPhoneNumber] = useState<string>("");
+  const [detailedAddress, setDetailedAddress] = useState<string>("");
+  const [notes, setNots] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const location = useLocation();
   const { shoppingCartId, fromSource } = location.state || {};
@@ -33,6 +35,8 @@ const CompleteOrder = () => {
         userId,
         shoppingCartId,
         shippingAddress,
+        detailedAddress,
+        notes,
         phoneNumebr
       );
       if (res?.status === 200) {
@@ -66,6 +70,28 @@ const CompleteOrder = () => {
             type="text"
             value={shippingAddress}
             onChange={(e) => setAddress(e.target.value)}
+            className="inputField"
+            placeholder={t("address")}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>{t("address")}</label>
+          <input
+            type="text"
+            value={detailedAddress}
+            onChange={(e) => setDetailedAddress(e.target.value)}
+            className="inputField"
+            placeholder={t("address")}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>{t("address")}</label>
+          <input
+            type="text"
+            value={notes}
+            onChange={(e) => setNots(e.target.value)}
             className="inputField"
             placeholder={t("address")}
             required

@@ -19,6 +19,8 @@ const OrderService = {
     userId: string,
     shoppingCartId: number,
     shippingAddress: string,
+    detailedAddress: string,
+    notes: string,
     phoneNumebr: string
   ) => {
     try {
@@ -26,6 +28,8 @@ const OrderService = {
         userId,
         shoppingCartId,
         shippingAddress,
+        detailedAddress,
+        notes,
         phoneNumebr,
       });
     } catch (err: any) {
@@ -82,6 +86,14 @@ const OrderService = {
         });
       }
     }
+  },
+
+  addDiscount: async (orderId: string, code: string) => {
+    const req = await axiosInstance
+      .get(`Coupons/apply?orderId=${orderId}&couponCode=${code}`)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+    return req;
   },
 };
 

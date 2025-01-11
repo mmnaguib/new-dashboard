@@ -3,11 +3,18 @@ import OrderService from "../../services/orderService";
 import { IOrderProps } from "../../interface";
 import "./Payment.css";
 import { Navigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import PaymentService from "../../services/paymentService";
+import { toast } from "react-toastify";
 
 const Payment = () => {
   const location = useLocation();
   const { fromSource, orderId } = location.state || {};
   const [order, setOrder] = useState<IOrderProps | null>(null);
+  const [coupon, setCoupon] = useState<boolean>(false);
+  const [code, setCode] = useState<string>("");
+  const { t }: { t: (key: string) => string } = useTranslation();
+
   const getOrderDetails = async (orderId: string) => {
     try {
       const orderDetail = await OrderService.getUserOrder(orderId);
@@ -42,6 +49,14 @@ const Payment = () => {
   //     initialPayment(totalPrice, "EGP");
   //   }
   // }, [order]);
+
+  const AddCouponToInvoice = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    const res = await OrderService.addDiscount(orderId, code);
+    setCoupon(false);
+    window.location.reload();
+    toast.success(res.message);
+  };
 
   return (
     <>
@@ -85,8 +100,13 @@ const Payment = () => {
               </Fragment>
             ))}
             <div className="total-price">
-              السعر الاجمالي للفاتورة : <span>{order?.totalAmount}</span> جنيه
-              لا غير
+              السعر الاجمالي للفاتورة :{" "}
+              <span style={{ textDecoration: "line-through" }}>
+                {order?.totalAmount}
+              </span>{" "}
+              جنيه لا غير
+              <br />
+              <span>{order?.netPrice}</span>
             </div>
           </div>
         </div>
@@ -103,6 +123,37 @@ const Payment = () => {
           </li>
         </ul>
       </div>
+      <button onClick={() => setCoupon(true)}>add</button>
+      {coupon && (
+        <div>
+          <form onSubmit={AddCouponToInvoice}>
+            <div className="form-group">
+              <label>{t("address")}</label>
+              <input
+                type="text"
+                value={orderId}
+                className="inputField"
+                placeholder={t("address")}
+                required
+                readOnly
+              />
+            </div>
+
+            <div className="form-group">
+              <label>{t("address")}</label>
+              <input
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                className="inputField"
+                placeholder={t("address")}
+                required
+              />
+            </div>
+            <button type="submit">coupon</button>
+          </form>
+        </div>
+      )}
     </>
   );
 };

@@ -73,6 +73,7 @@ export interface IOrderProps {
   number: string;
   detailedAddress: string;
   notes: string;
+  netPrice: number;
 }
 
 export interface IOrderItem {
@@ -107,6 +108,7 @@ export interface IEditProductPopupProps {
 }
 
 export interface ICoupon {
+  id: number;
   name: string;
   code: string;
   discountType: number;
@@ -115,7 +117,8 @@ export interface ICoupon {
   maxDiscountValue: number;
   startDate: Date;
   endDate: Date;
-  bloggerId: number;
+  bloggerName: string;
+  usageCount: number;
 }
 
 export interface IBlogger {

@@ -12,6 +12,7 @@ const Coupons = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(res.data);
     setCoupons(res.data);
   }, [token]);
 
@@ -27,17 +28,27 @@ const Coupons = () => {
           <tr>
             <th>#</th>
             <th>المسوق</th>
-            <th>البريد الالكتروني</th>
-            <th>رقم الهاتف</th>
+            <th>الاسم</th>
+            <th>الكود</th>
+            <th>نسبة الخصم</th>
+            <th>تاريخ الخصم</th>
+            <th>عدد مرات الاستخدام</th>
           </tr>
         </thead>
         <tbody>
           {coupons.map((coupon, index) => (
-            <tr>
+            <tr key={coupon.id}>
               <td>{index + 1}</td>
+              <td>{coupon.bloggerName}</td>
               <td>{coupon.name}</td>
               <td>{coupon.code}</td>
-              <td>{coupon.bloggerId}</td>
+              <td>
+                {coupon.discountValue} / {coupon.discountType}
+              </td>
+              <td>
+                {coupon.startDate.toString()} / {coupon.endDate.toString()}
+              </td>
+              <td>{coupon.usageCount}</td>
             </tr>
           ))}
         </tbody>
